@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { getFirestore, doc, setDoc } from 'firebase/firestore'
-import { app } from "../firebaseConfig"
+import { doc, setDoc } from 'firebase/firestore'
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import { UserAuth } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
+import { db } from "../firebaseConfig"
 
 const UserCreate = () => {
 
@@ -14,9 +14,11 @@ const UserCreate = () => {
   const [ previewImage, setPreviewImage ] = useState('')
   const [ profileImg, setProfileImg ] = useState(null)
 
-  const db = getFirestore(app)
   const storage = getStorage()
   const navigate = useNavigate()
+
+  
+
 
   const handleChange = (e) => { 
     setUsername(e.target.value)
@@ -27,14 +29,19 @@ const UserCreate = () => {
     uploadFile() //make sure image is uploaded before setting data
     if (username.length > 0 && profileImg) {
       try {
-        await setDoc(doc(db, 'users', username), {
+        await setDoc(doc(db, 'users', user.uid), {
           username: username,
           profileImg: profileImg
         }).then(() => {
           setUsername('')
-          console.log('data sent')
+          console.log('main data sent')
           navigate(`/${username}`)
           })
+
+          await setDoc(doc(db, 'usernames', username), {
+            uid: user.uid
+          })
+          .then(() => console.log('uid sent'))
       } catch (error) {
         console.log(error)
       }

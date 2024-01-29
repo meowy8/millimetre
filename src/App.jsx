@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import Profile from './pages/Profile'
 import { AuthContextProvider } from './context/AuthContext'
-import UserCreate from './pages/U'
+import UserCreate from './pages/UserCreate'
 
 function App() {
 
