@@ -5,7 +5,7 @@ const Catalogue = () => {
   const [ filmData, setFilmData ] = useState([])
 
   useEffect(() => {
-    const filmDataFetch = async () => {
+    const filmListFetch = async () => {
       try {
         const options = {
           method: 'GET',
@@ -30,7 +30,7 @@ const Catalogue = () => {
       }
     }
 
-    filmDataFetch()
+    filmListFetch()
   }, [])
 
   console.log(filmData)
@@ -42,7 +42,7 @@ const Catalogue = () => {
         filmData.map(film => {
           const posterUrl = 'https://image.tmdb.org/t/p/original/' + film.poster_path
           const filmTitle = film.title.toLowerCase().split(' ').join('-')
-          return <MediumFilmIcon key={film.id} posterUrl={posterUrl} filmTitle={filmTitle}/>
+          return <MediumFilmIcon key={film.id} id={film.id} posterUrl={posterUrl} filmTitle={filmTitle}/>
         })
         }
       </div>
