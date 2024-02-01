@@ -12,7 +12,8 @@ const NavBar = () => {
         <Link to='/'>mm</Link>
       </div>
       <div className="flex gap-4">
-        {user && <Link to={`/${userAccount?.username}`}>Profile</Link>}
+        <Link to={'/catalogue'}>Catalogue</Link>
+        {user && <Link to={`/user/${userAccount?.username}`}>Profile</Link>}
         {user 
         ?
         <LogoutButton />
