@@ -11,6 +11,7 @@ const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => {
   const [ user, setUser ] = useState({})
+  const [ userAccount, setUserAccount ] = useState(null)
 
   const googleSignIn = async () => { 
     const provider = new GoogleAuthProvider()
@@ -23,12 +24,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   useEffect(() => console.log(user), [user])
-
-  const logOut = () => {
-    signOut(auth)
-    console.log('test')
-  }
-
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
@@ -37,9 +33,15 @@ export const AuthContextProvider = ({ children }) => {
       unsubscribe()
     }
   }, [])
+  
+  const logOut = () => {
+    signOut(auth)
+  }
+
+  console.log(userAccount)
 
   return (
-    <AuthContext.Provider value={{ googleSignIn, logOut, user }}>
+    <AuthContext.Provider value={{ googleSignIn, logOut, user, userAccount, setUserAccount }}>
       {children}
     </AuthContext.Provider>
   )

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { doc, setDoc } from 'firebase/firestore'
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import { UserAuth } from "../context/AuthContext"
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import { db } from "../firebaseConfig"
 
 const UserCreate = () => {
@@ -17,8 +17,9 @@ const UserCreate = () => {
   const storage = getStorage()
   const navigate = useNavigate()
 
-  
-
+  if (user) {
+    return <Navigate to={'/'}/>
+  }
 
   const handleChange = (e) => { 
     setUsername(e.target.value)

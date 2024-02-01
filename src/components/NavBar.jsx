@@ -4,14 +4,15 @@ import LogoutButton from "./LogoutButton"
 
 const NavBar = () => {
 
-  const { user } = UserAuth()
+  const { user, userAccount } = UserAuth()
 
   return (
     <nav className="flex justify-between p-4 bg-slate-600">
       <div>
         <Link to='/'>mm</Link>
       </div>
-      <div>
+      <div className="flex gap-4">
+        {user && <Link to={`/${userAccount?.username}`}>Profile</Link>}
         {user 
         ?
         <LogoutButton />
