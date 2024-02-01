@@ -10,7 +10,7 @@ const UserCreate = () => {
   const { user } = UserAuth()
 
   const [ username, setUsername ] = useState('')
-  const [ fileToUpload, setFileToUpload ] = useState()
+  const [ fileToUpload, setFileToUpload ] = useState(null)
   const [ previewImage, setPreviewImage ] = useState('')
   const [ profileImg, setProfileImg ] = useState(null)
 

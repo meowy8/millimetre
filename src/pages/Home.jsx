@@ -1,3 +1,5 @@
+import UserList from "../components/UserList"
+
 const Home = () => {
   return (
     <div className="flex flex-col items-center h-screen">
@@ -16,6 +18,7 @@ const Home = () => {
           <img src="" alt="" />
         </div>
       </div>
+      <UserList />
     </div>
   )
 }
