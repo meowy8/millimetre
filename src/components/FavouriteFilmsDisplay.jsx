@@ -4,7 +4,7 @@ import { collection, getDocs } from "firebase/firestore"
 import { db } from "../firebaseConfig"
 import { FilmCatalogue } from "../context/FilmCatalogueContext"
 
-const FavouriteFilmsDisplay = ({ username, userUid }) => {
+const FavouriteFilmsDisplay = ({ username, userDataId }) => {
   const [ favFilmsId, setFavFilmsId ] = useState([])
   const [ favFilmsData, setFavFilmsData ] = useState([])
 
@@ -13,7 +13,7 @@ const FavouriteFilmsDisplay = ({ username, userUid }) => {
   useEffect(() => {
     const fetchFavFilms = async () => {
       try {
-        const favFilmsCollection = collection(db, 'users', userUid, 'favFilms')
+        const favFilmsCollection = collection(db, 'users', userDataId, 'favFilms')
         const collectionSnapshot = await getDocs(favFilmsCollection)
         
         if (!collectionSnapshot.empty) {
@@ -29,7 +29,7 @@ const FavouriteFilmsDisplay = ({ username, userUid }) => {
     }
 
     fetchFavFilms()
-  }, [userUid])
+  }, [userDataId])
 
   useEffect(() => {
     favFilmsId.forEach(id => {

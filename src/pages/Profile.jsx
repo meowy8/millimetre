@@ -43,8 +43,8 @@ const Profile = () => {
         </div>
         {user?.uid === userDocId && <Link className="bg-green-900 p-2 rounded-full text-sm">Edit Profile</Link>}
         <span id='username' className="text-lg">{userProfile.username}</span>
-        <UserBio />
-        <FavouriteFilmsDisplay username={userProfile.username} userUid={user.uid}/>
+        <UserBio bio={userProfile.bio}/>
+        <FavouriteFilmsDisplay username={userProfile.username} userDataId={userDocId}/>
       </div>
     }
     </>

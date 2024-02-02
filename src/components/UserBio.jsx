@@ -1,7 +1,7 @@
-const UserBio = () => {
+const UserBio = ({ bio }) => {
   return (
     <div>
-      <p className="text-sm">Front-End Web Developer</p>
+      <p className="text-sm">{bio}</p>
     </div>
   )
 }
