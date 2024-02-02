@@ -47,19 +47,19 @@ const Film = () => {
   console.log(directors)
 
   return (
-    <div className="flex flex-col justify-center items-center m-10">
-      <div className="flex gap-10">
-        <div>
+    <div className="flex flex-col items-center p-10 ">
+      <div className="flex flex-col gap-10">
+        <div className="flex justify-center">
           <LargeFilmIcon posterUrl={'https://image.tmdb.org/t/p/original/' + filmPageData.poster_path}/>
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <h1 className="text-2xl">{filmPageData.title}</h1>
+            <h1 className="text-2xl font-semibold">{filmPageData.title}</h1>
             {directors.map(director => {
-              return <span key={director.id} className="text-md text-gray-600">{director.name}</span>
+              return <span key={director.id} className="text-md font-light text-slate-400">{director.name}</span>
             })}
           </div>
-          <p>
+          <p className="">
             {filmPageData.overview}
           </p>
         </div>

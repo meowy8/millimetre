@@ -32,10 +32,12 @@ const Home = () => {
     filmListFetch()
   }, [])
 
+  
+
   return (
     <div className="flex flex-col items-center h-screen">
       <h1 className="text-3xl m-10">Home</h1>
-      <div id="films-container" className="bg-black flex items-center justify-center py-4 px-10">
+      <div id="films-container" className="bg-[#2a1f35] flex items-center justify-center py-4 px-10 rounded-xl">
         <div className="grid grid-cols-2 gap-4">
           {filmDisplay?.map(film => {
           const posterUrl = 'https://image.tmdb.org/t/p/original/' + film.poster_path

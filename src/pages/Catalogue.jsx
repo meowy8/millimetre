@@ -37,7 +37,7 @@ const Catalogue = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <div id='catalogue-container' className="grid grid-cols-4 gap-4 p-8">
+      <div id='catalogue-container' className="grid grid-cols-3 gap-4">
         {
         filmData.map(film => {
           const posterUrl = 'https://image.tmdb.org/t/p/original/' + film.poster_path

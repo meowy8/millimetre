@@ -10,18 +10,23 @@ import Film from './pages/Film'
 import Catalogue from './pages/Catalogue'
 
 function App() {
+  const texturePath = '/texture.svg'
 
   return (
     <AuthContextProvider>
-      <NavBar />
-      <Routes>
-        <Route path='/' element={<Home />}/>
-        <Route path='/film/:filmId/:title' element={<Film />}/>
-        <Route path='/catalogue' element={<Catalogue />}/>
-        <Route path='/signin' element={<SignIn />}/>
-        <Route path='/usercreate' element={<UserCreate />}/>
-        <Route path='/user/:userId' element={<Profile />}/>
-      </Routes>
+      <div className='text-white'>
+        <NavBar />
+        <div style={{backgroundImage: `url(${texturePath})`}} className='bg-gray-950 h-screen p-10'>
+          <Routes>
+            <Route path='/' element={<Home />}/>
+            <Route path='/film/:filmId/:title' element={<Film />}/>
+            <Route path='/catalogue' element={<Catalogue />}/>
+            <Route path='/signin' element={<SignIn />}/>
+            <Route path='/usercreate' element={<UserCreate />}/>
+            <Route path='/user/:userId' element={<Profile />}/>
+          </Routes>
+        </div>
+      </div>
     </AuthContextProvider> 
   )
 }

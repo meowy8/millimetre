@@ -7,7 +7,7 @@ const NavBar = () => {
   const { user, userAccount } = UserAuth()
 
   return (
-    <nav className="flex justify-between p-4 bg-slate-600">
+    <nav className="flex justify-between p-4 bg-[#28143e]">
       <div>
         <Link to='/'>mm</Link>
       </div>

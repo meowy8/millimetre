@@ -24,9 +24,9 @@ const UserList = () => {
   
   console.log(userData)
   return (
-    <div className="bg-green-300 m-10 p-4">
+    <div className="bg-[#2a1f35] m-10 p-4 rounded-lg">
       <h1>List of Users</h1>
-      <div className="grid grid-cols-3  ">
+      <div className="grid grid-cols-3 gap-1">
         {userData.map(user => {
           return <SmallUserIcon key={user.id} username={user.username} profileImg={user.profileImg}/>
         })}
