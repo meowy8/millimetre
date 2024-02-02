@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { collection, where, getDocs, query } from 'firebase/firestore'
 import { db } from "../firebaseConfig"
+import FavouriteFilmsDisplay from "../components/FavouriteFilmsDisplay"
+import UserBio from "../components/UserBio"
+import { UserAuth } from "../context/AuthContext"
 
 const Profile = () => {
   const [ userProfile, setUserProfile ] = useState(null)
+  const [ userDocId, setUserDocId ] = useState(null)
 
   const { userId } = useParams()
+  const { user } = UserAuth()
 
 // change to try catch
   useEffect(() => {
@@ -18,10 +23,10 @@ const Profile = () => {
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0]
   
-        const userData = userDoc.data()
         setUserProfile(userDoc.data())
+        setUserDocId(userDoc.id)
         
-        console.log('User found:', userData)
+        console.log('User found:', userDoc.data())
       }  
     }
 
@@ -36,7 +41,10 @@ const Profile = () => {
         <div className="bg-red-400 w-32 h-32 rounded-full overflow-hidden flex justify-center items-center">
           <img src={userProfile.profileImg} alt="" className=""/>
         </div>
-        <span id='username'>{userProfile.username}</span>
+        {user?.uid === userDocId && <Link className="bg-green-900 p-2 rounded-full text-sm">Edit Profile</Link>}
+        <span id='username' className="text-lg">{userProfile.username}</span>
+        <UserBio />
+        <FavouriteFilmsDisplay username={userProfile.username} userUid={user.uid}/>
       </div>
     }
     </>

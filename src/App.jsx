@@ -8,6 +8,7 @@ import { AuthContextProvider } from './context/AuthContext'
 import UserCreate from './pages/UserCreate'
 import Film from './pages/Film'
 import Catalogue from './pages/Catalogue'
+import { FilmCatalogueProvider } from './context/FilmCatalogueContext'
 
 function App() {
   const texturePath = '/texture.svg'
@@ -17,14 +18,16 @@ function App() {
       <div className='text-white'>
         <NavBar />
         <div style={{backgroundImage: `url(${texturePath})`}} className='bg-gray-950 h-screen p-10'>
-          <Routes>
-            <Route path='/' element={<Home />}/>
-            <Route path='/film/:filmId/:title' element={<Film />}/>
-            <Route path='/catalogue' element={<Catalogue />}/>
-            <Route path='/signin' element={<SignIn />}/>
-            <Route path='/usercreate' element={<UserCreate />}/>
-            <Route path='/user/:userId' element={<Profile />}/>
-          </Routes>
+          <FilmCatalogueProvider>
+            <Routes>
+              <Route path='/' element={<Home />}/>
+              <Route path='/film/:filmId/:title' element={<Film />}/>
+              <Route path='/catalogue' element={<Catalogue />}/>
+              <Route path='/signin' element={<SignIn />}/>
+              <Route path='/usercreate' element={<UserCreate />}/>
+              <Route path='/user/:userId' element={<Profile />}/>
+            </Routes>
+          </FilmCatalogueProvider>
         </div>
       </div>
     </AuthContextProvider> 
