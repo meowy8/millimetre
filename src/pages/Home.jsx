@@ -19,7 +19,7 @@ const Home = () => {
         fetch(`https://api.themoviedb.org/3/list/8289621?language=en-US&page=1`, options)
           .then(response => response.json())
           .then(data => {
-            console.log(data)
+           // console.log(data)
             const selectedFilms = data.items.filter((film, index) => index < 4)
             setFilmDisplay(selectedFilms)
           })

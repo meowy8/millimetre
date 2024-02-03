@@ -39,7 +39,7 @@ const FavouriteFilmsDisplay = ({ username, userDataId }) => {
 
   }, [favFilmsId, filmCatalogue])
   
-  console.log(favFilmsData)
+  //console.log(favFilmsData)
   
 
   return (

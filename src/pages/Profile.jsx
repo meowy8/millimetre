@@ -26,7 +26,7 @@ const Profile = () => {
         setUserProfile(userDoc.data())
         setUserDocId(userDoc.id)
         
-        console.log('User found:', userDoc.data())
+        //console.log('User found:', userDoc.data())
       }  
     }
 

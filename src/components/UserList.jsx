@@ -22,7 +22,7 @@ const UserList = () => {
     fetchUserList()
   }, [])
   
-  console.log(userData)
+  //console.log(userData)
   return (
     <div className="bg-[#2a1f35] m-10 p-4 rounded-lg">
       <h1>List of Users</h1>

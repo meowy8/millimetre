@@ -9,7 +9,7 @@ const SignIn = () => {
   const [ userExists, setUserExists ] = useState(null) 
   const [ username, setUsername ] = useState(null)
 
-  const { googleSignIn, user, setUserAccount } = UserAuth()
+  const { googleSignIn, user } = UserAuth()
 
   const navigate = useNavigate()
 
@@ -26,7 +26,6 @@ const SignIn = () => {
     const userDoc = await getDoc(userRef)
     setUsername(userDoc.data().username)
     setUserExists(userDoc.exists())
-    setUserAccount(userDoc.data())
   }
   
   // fix redirect when a user already has an account

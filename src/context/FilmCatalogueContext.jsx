@@ -20,7 +20,7 @@ export const FilmCatalogueProvider = ({children}) => {
           fetch(`https://api.themoviedb.org/3/list/8289621?language=en-US&page=${pageNum}`, options)
             .then(response => response.json())
             .then(data => {
-              console.log('Fetched data inside context', data)
+             // console.log('Fetched data inside context', data)
               data.items.forEach(film => setFilmCatalogue(prev => [...prev, film]))
             })
             .catch(err => console.error(err));
@@ -34,7 +34,7 @@ export const FilmCatalogueProvider = ({children}) => {
     filmListFetch()
   }, [])
 
-  console.log('From context, film catalogue:', filmCatalogue)
+  //console.log('From context, film catalogue:', filmCatalogue)
 
   return (
     <FilmCatalogueContext.Provider value={{filmCatalogue}}>
