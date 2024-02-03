@@ -33,6 +33,8 @@ const Profile = () => {
     getUserData()
   }, [userId])
 
+  useEffect(() => console.log(userProfile))
+
   return (
     <>
     {userProfile && 
@@ -41,7 +43,7 @@ const Profile = () => {
         <div className="bg-red-400 w-32 h-32 rounded-full overflow-hidden flex justify-center items-center">
           <img src={userProfile.profileImg} alt="" className=""/>
         </div>
-        {user?.uid === userDocId && <Link className="bg-green-900 p-2 rounded-full text-sm">Edit Profile</Link>}
+        {user?.uid === userDocId && <Link to={'/settings'} className="bg-green-900 p-2 rounded-full text-sm">Edit Profile</Link>}
         <span id='username' className="text-lg">{userProfile.username}</span>
         <UserBio bio={userProfile.bio}/>
         <FavouriteFilmsDisplay username={userProfile.username} userDataId={userDocId}/>

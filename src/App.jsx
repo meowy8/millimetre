@@ -9,6 +9,7 @@ import UserCreate from './pages/UserCreate'
 import Film from './pages/Film'
 import Catalogue from './pages/Catalogue'
 import { FilmCatalogueProvider } from './context/FilmCatalogueContext'
+import Settings from './pages/Settings'
 
 function App() {
   const texturePath = '/texture.svg'
@@ -26,6 +27,7 @@ function App() {
               <Route path='/signin' element={<SignIn />}/>
               <Route path='/usercreate' element={<UserCreate />}/>
               <Route path='/user/:userId' element={<Profile />}/>
+              <Route path='/settings' element={<Settings />}/>
             </Routes>
           </FilmCatalogueProvider>
         </div>

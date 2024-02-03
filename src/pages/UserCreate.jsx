@@ -7,7 +7,7 @@ import { db } from "../firebaseConfig"
 
 const UserCreate = () => {
 
-  const { user } = UserAuth()
+  const { user, userAccount } = UserAuth()
 
   const [ username, setUsername ] = useState('')
   const [ fileToUpload, setFileToUpload ] = useState(null)
@@ -17,8 +17,12 @@ const UserCreate = () => {
   const storage = getStorage()
   const navigate = useNavigate()
 
-  if (user) {
+  if (userAccount) {
     return <Navigate to={'/'}/>
+  }
+
+  if (!user) {
+    return <Navigate to={'/signin'}/>
   }
 
   const handleChange = (e) => { 
@@ -36,13 +40,9 @@ const UserCreate = () => {
         }).then(() => {
           setUsername('')
           console.log('main data sent')
-          navigate(`/${username}`)
+          navigate(`/users/${username}`)
           })
 
-          await setDoc(doc(db, 'usernames', username), {
-            uid: user.uid
-          })
-          .then(() => console.log('uid sent'))
       } catch (error) {
         console.log(error)
       }

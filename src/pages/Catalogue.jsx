@@ -6,7 +6,7 @@ const Catalogue = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <div id='catalogue-container' className="grid grid-cols-3 gap-4">
+      <div id='catalogue-container' className="grid grid-cols-2 gap-4">
         {
         filmCatalogue.map(film => {
           const posterUrl = 'https://image.tmdb.org/t/p/original/' + film.poster_path

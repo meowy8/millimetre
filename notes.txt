@@ -1,1 +1,1 @@
-- fix profile button so that you go to sign in users profile without them having to log out and sign in again after leaving the website
+- fix user create page so that you can only view it when you are signing in, so if you have been authorised or 
