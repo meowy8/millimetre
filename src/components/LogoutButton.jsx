@@ -1,11 +1,9 @@
-import { UserAuth } from "../context/AuthContext"
+import { UserAuth } from "../context/AuthContext";
 
 const LogoutButton = () => {
-  const { logOut } = UserAuth()
+  const { logOut } = UserAuth();
 
-  return (
-    <button onClick={logOut}>Logout</button>
-  )
-}
+  return <button onClick={logOut}>Logout</button>;
+};
 
-export default LogoutButton
+export default LogoutButton;

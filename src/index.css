@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type='text'] {
+input[type="text"] {
   color: black;
 }

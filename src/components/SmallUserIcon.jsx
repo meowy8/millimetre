@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const SmallUserIcon = ({ username, profileImg }) => {
   return (
-    <Link to={`/user/${username}`} >
+    <Link to={`/user/${username}`}>
       <div className="w-12 h-12 rounded-full overflow-hidden flex justify-center items-center">
-        <img src={profileImg} alt="" className=""/>
+        <img src={profileImg} alt="" className="" />
       </div>
     </Link>
-  )
-}
+  );
+};
 
-export default SmallUserIcon
+export default SmallUserIcon;

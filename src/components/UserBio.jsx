@@ -3,7 +3,7 @@ const UserBio = ({ bio }) => {
     <div>
       <p className="text-sm">{bio}</p>
     </div>
-  )
-}
+  );
+};
 
-export default UserBio
+export default UserBio;
