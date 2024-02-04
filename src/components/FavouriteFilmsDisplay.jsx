@@ -17,7 +17,7 @@ const FavouriteFilmsDisplay = ({ username, userDataId }) => {
           db,
           "users",
           userDataId,
-          "favFilms",
+          "favFilms"
         );
         const collectionSnapshot = await getDocs(favFilmsCollection);
 
@@ -50,21 +50,23 @@ const FavouriteFilmsDisplay = ({ username, userDataId }) => {
       <div className="mb-2">
         <span className="text-lg">Favourites</span>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div>
         {favFilmsData.length > 0 ? (
-          favFilmsData.map((film) => {
-            const filmTitle = film.title.toLowerCase().split(" ").join("-");
-            const posterUrl =
-              "https://image.tmdb.org/t/p/original/" + film.poster_path;
-            return (
-              <MediumFilmIcon
-                key={film.id}
-                id={film.id}
-                filmTitle={filmTitle}
-                posterUrl={posterUrl}
-              />
-            );
-          })
+          <div className="grid grid-cols-3 gap-4">
+            {favFilmsData.map((film) => {
+              const filmTitle = film.title.toLowerCase().split(" ").join("-");
+              const posterUrl =
+                "https://image.tmdb.org/t/p/original/" + film.poster_path;
+              return (
+                <MediumFilmIcon
+                  key={film.id}
+                  id={film.id}
+                  filmTitle={filmTitle}
+                  posterUrl={posterUrl}
+                />
+              );
+            })}
+          </div>
         ) : (
           <p className="text-sm font-extralight rounded-lg">
             {username} has yet to choose their favourite films

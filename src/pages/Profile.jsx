@@ -45,7 +45,7 @@ const Profile = () => {
         <div className="flex flex-col items-center gap-4">
           <h1 className="text-3xl">Profile</h1>
           <div className="bg-red-400 w-32 h-32 rounded-full overflow-hidden flex justify-center items-center">
-            <img src={userProfile.profileImg} alt="" className="" />
+            <img src={userProfile.profileImg} alt="" className="flex w-full h-full object-cover" />
           </div>
           {user?.uid === userDocId && (
             <Link

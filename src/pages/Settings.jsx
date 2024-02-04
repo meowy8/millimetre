@@ -23,6 +23,19 @@ const Settings = () => {
   const storage = getStorage();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setPreviewImage(userAccount?.profileImg);
+    setProfileImg(userAccount?.profileImg);
+  }, [userAccount]);
+
+  useEffect(() => {
+    setUsername(userAccount?.username);
+  }, [userAccount]);
+
+  useEffect(() => {
+    setBio(userAccount?.bio);
+  }, [userAccount]);
+
   if (!user) {
     return <Navigate to={"/signin"} />;
   }
@@ -79,18 +92,7 @@ const Settings = () => {
     await getDownloadURL(mediaStorRef).then((url) => setProfileImg(url));
   };
 
-  useEffect(() => {
-    setPreviewImage(userAccount?.profileImg);
-    setProfileImg(userAccount?.profileImg);
-  }, [userAccount]);
 
-  useEffect(() => {
-    setUsername(userAccount?.username);
-  }, [userAccount]);
-
-  useEffect(() => {
-    setBio(userAccount?.bio);
-  }, [userAccount]);
 
   return (
     <div className="flex flex-col justify-center items-center w-full gap-4">
