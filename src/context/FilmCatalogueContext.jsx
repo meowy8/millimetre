@@ -4,6 +4,7 @@ const FilmCatalogueContext = createContext();
 
 export const FilmCatalogueProvider = ({ children }) => {
   const [filmCatalogue, setFilmCatalogue] = useState([]);
+  const [watchedFilmsData, setWatchedFilmsData] = useState([]);
 
   useEffect(() => {
     const filmListFetch = async () => {
@@ -20,13 +21,13 @@ export const FilmCatalogueProvider = ({ children }) => {
         for (let pageNum = 1; pageNum <= 3; pageNum++) {
           fetch(
             `https://api.themoviedb.org/3/list/8289621?language=en-US&page=${pageNum}`,
-            options,
+            options
           )
             .then((response) => response.json())
             .then((data) => {
               // console.log('Fetched data inside context', data)
               data.items.forEach((film) =>
-                setFilmCatalogue((prev) => [...prev, film]),
+                setFilmCatalogue((prev) => [...prev, film])
               );
             })
             .catch((err) => console.error(err));
@@ -42,7 +43,9 @@ export const FilmCatalogueProvider = ({ children }) => {
   //console.log('From context, film catalogue:', filmCatalogue)
 
   return (
-    <FilmCatalogueContext.Provider value={{ filmCatalogue }}>
+    <FilmCatalogueContext.Provider
+      value={{ filmCatalogue, watchedFilmsData, setWatchedFilmsData }}
+    >
       {children}
     </FilmCatalogueContext.Provider>
   );

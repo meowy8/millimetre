@@ -50,7 +50,7 @@ const FavouriteFilmsDisplay = ({ username, userDataId }) => {
       <div className="mb-2">
         <span className="text-lg">Favourites</span>
       </div>
-      <div className="flex gap-4">
+      <div className="grid grid-cols-3 gap-4">
         {favFilmsData.length > 0 ? (
           favFilmsData.map((film) => {
             const filmTitle = film.title.toLowerCase().split(" ").join("-");

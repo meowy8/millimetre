@@ -6,10 +6,9 @@ import MediumFilmIcon from "./MediumFilmIcon";
 
 const WatchedFilmsDisplay = ({ username, userDataId }) => {
   const [watchedFilmsId, setWatchedFilmsId] = useState([]);
-  const [watchedFilmsData, setWatchedFilmsData] = useState([]);
   const [numOfFilmsDisplayed, setNumOfFilmsDisplayed] = useState(6);
 
-  const { filmCatalogue } = FilmCatalogue();
+  const { filmCatalogue, watchedFilmsData, setWatchedFilmsData } = FilmCatalogue();
 
   useEffect(() => {
     const fetchWatchedFilms = async () => {
@@ -42,7 +41,7 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
       const data = filmCatalogue.find((film) => film.id === id);
       setWatchedFilmsData((prev) => [...prev, data]);
     });
-  }, [filmCatalogue, watchedFilmsId]);
+  }, [filmCatalogue, watchedFilmsId, setWatchedFilmsData]);
 
   useEffect(() => console.log(numOfFilmsDisplayed), [numOfFilmsDisplayed]);
 

@@ -1,5 +1,2 @@
-- add a view all button to see more detail
-- completion number i.e. 17/45 films watched
-
 - fade watched films
 - add toggle for fading
