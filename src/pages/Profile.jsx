@@ -5,6 +5,7 @@ import { db } from "../firebaseConfig";
 import FavouriteFilmsDisplay from "../components/FavouriteFilmsDisplay";
 import UserBio from "../components/UserBio";
 import { UserAuth } from "../context/AuthContext";
+import WatchedFilmsDisplay from "../components/WatchedFilmsDisplay";
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState(null);
@@ -19,7 +20,7 @@ const Profile = () => {
       const usersCollection = collection(db, "users");
       const usernameQuery = query(
         usersCollection,
-        where("username", "==", userId),
+        where("username", "==", userId)
       );
       const querySnapshot = await getDocs(usernameQuery);
 
@@ -59,6 +60,10 @@ const Profile = () => {
           </span>
           <UserBio bio={userProfile.bio} />
           <FavouriteFilmsDisplay
+            username={userProfile.username}
+            userDataId={userDocId}
+          />
+          <WatchedFilmsDisplay
             username={userProfile.username}
             userDataId={userDocId}
           />
