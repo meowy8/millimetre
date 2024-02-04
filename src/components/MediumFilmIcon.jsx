@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 const MediumFilmIcon = ({ id, posterUrl, filmTitle }) => {
   return (
-    <div className="max-w-32 max-h-42 overflow-hidden rounded-sm">
+    <div className="flex max-w-36 max-h-56 overflow-hidden rounded-sm">
       <Link to={`/film/${id}/${filmTitle}`}>
-        <img src={posterUrl} alt="" className="flex w-full" />
+        <img src={posterUrl} alt="" className=" flex h-full" />
       </Link>
     </div>
   );
