@@ -1,6 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { UserAuth } from "../context/AuthContext";
 import { db } from "../firebaseConfig";
 import { FilmCatalogue } from "../context/FilmCatalogueContext";
 import MediumFilmIcon from "./MediumFilmIcon";
@@ -8,7 +7,7 @@ import MediumFilmIcon from "./MediumFilmIcon";
 const WatchedFilmsDisplay = ({ username, userDataId }) => {
   const [watchedFilmsId, setWatchedFilmsId] = useState([]);
   const [watchedFilmsData, setWatchedFilmsData] = useState([]);
-  const [numOfFilmsDisplayed, setNumOfFilmsDisplayed] = useState(6)
+  const [numOfFilmsDisplayed, setNumOfFilmsDisplayed] = useState(6);
 
   const { filmCatalogue } = FilmCatalogue();
 
@@ -45,15 +44,15 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
     });
   }, [filmCatalogue, watchedFilmsId]);
 
-  useEffect(() => console.log(watchedFilmsData), [watchedFilmsData]);
+  useEffect(() => console.log(numOfFilmsDisplayed), [numOfFilmsDisplayed]);
 
   const changeView = () => {
     if (numOfFilmsDisplayed === 6) {
-      setNumOfFilmsDisplayed(watchedFilmsData.length)
+      setNumOfFilmsDisplayed(watchedFilmsData.length);
     } else {
-      setNumOfFilmsDisplayed(6)
+      setNumOfFilmsDisplayed(6);
     }
-  }
+  };
 
   return (
     <div className="bg-[#150921] p-4">
@@ -64,33 +63,42 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
             {watchedFilmsData.length}/{filmCatalogue.length}
           </span>
         </div>
-        {numOfFilmsDisplayed === 6
-        ?
-        <button onClick={changeView} className="text-sm">Show More</button>
-        :
-        <button onClick={changeView} className="text-sm">Show Less</button>
-        }
+        <div>
+          {watchedFilmsData.length > 6 ? (
+            numOfFilmsDisplayed === 6 ? (
+              <button onClick={changeView} className="text-sm">
+                Show More
+              </button>
+            ) : (
+              <button onClick={changeView} className="text-sm">
+                Show Less
+              </button>
+            )
+          ) : null}
+        </div>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div>
         {watchedFilmsData.length > 0 ? (
-          watchedFilmsData.map((film, index) => {
-            if (index < numOfFilmsDisplayed) {
-              const filmTitle = film.title.toLowerCase().split(" ").join("-");
-              const posterUrl =
-                "https://image.tmdb.org/t/p/original/" + film.poster_path;
-              return (
-                <MediumFilmIcon
-                  key={film.id}
-                  id={film.id}
-                  filmTitle={filmTitle}
-                  posterUrl={posterUrl}
-                />
-              );
-            }
-          })
+          <div className="grid grid-cols-3 gap-4">
+            {watchedFilmsData.map((film, index) => {
+              if (index < numOfFilmsDisplayed) {
+                const filmTitle = film.title.toLowerCase().split(" ").join("-");
+                const posterUrl =
+                  "https://image.tmdb.org/t/p/original/" + film.poster_path;
+                return (
+                  <MediumFilmIcon
+                    key={film.id}
+                    id={film.id}
+                    filmTitle={filmTitle}
+                    posterUrl={posterUrl}
+                  />
+                );
+              }
+            })}
+          </div>
         ) : (
           <p className="text-sm font-extralight rounded-lg">
-            {username} has yet to choose their favourite films
+            {username} has yet to watch any films
           </p>
         )}
       </div>
