@@ -1,7 +1,7 @@
 import GoogleButton from "react-google-button";
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
@@ -21,22 +21,27 @@ const SignIn = () => {
     }
   };
 
-  const checkUserExists = async () => {
-    const userRef = doc(db, "users", user.uid);
-    const userDoc = await getDoc(userRef);
-    setUsername(userDoc.data().username);
-    setUserExists(userDoc.exists());
-  };
-
-  // fix redirect when a user already has an account
-  if (user) {
-    checkUserExists();
-    if (userExists) {
-      navigate(`/${username}`);
-    } else {
-      navigate("/usercreate");
+  useEffect(() => {
+    const checkUserExists = async () => {
+      const userRef = doc(db, "users", user.uid);
+      try {
+        const userDoc = await getDoc(userRef);
+        setUsername(userDoc.data().username);
+        setUserExists(userDoc.exists());
+      } catch (error) {
+        console.log(error)
+      }
+    };
+  
+    if (user) {
+      checkUserExists();
+      if (userExists) {
+        navigate(`/${username}`);
+      } else {
+        navigate("/usercreate");
+      }
     }
-  }
+  }, [navigate, user, userExists, username])
 
   return (
     <div className="flex flex-col items-center">

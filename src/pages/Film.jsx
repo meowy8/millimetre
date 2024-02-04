@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import LargeFilmIcon from "../components/LargeFilmIcon";
 import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
@@ -11,6 +11,7 @@ const Film = () => {
   const [watched, setWatched] = useState(false);
 
   const { user } = UserAuth();
+  const navigate = useNavigate()
 
   const { filmId } = useParams();
 
@@ -80,27 +81,36 @@ const Film = () => {
   }, [filmPageData, user]);
 
   const sendWatchedData = async () => {
-    const docRef = doc(db, "users", user.uid, "watched", `${filmPageData.id}`);
-    try {
-      await setDoc(docRef, {
-        title: filmPageData.title,
-        id: filmPageData.id,
-      })
-      .then(() => setWatched(true))
-    } catch (error) {
-      console.log(error);
+    if (!user) {
+      navigate('/signin');
+    } else {
+      const docRef = doc(
+        db,
+        "users",
+        user.uid,
+        "watched",
+        `${filmPageData.id}`
+      );
+      try {
+        await setDoc(docRef, {
+          title: filmPageData.title,
+          id: filmPageData.id,
+        }).then(() => setWatched(true));
+      } catch (error) {
+        console.log(error);
+      }
     }
+    console.log("clicked");
   };
 
   const deleteWatchedData = async () => {
     const docRef = doc(db, "users", user.uid, "watched", `${filmPageData.id}`);
     try {
-      await deleteDoc(docRef)
-      .then(() => setWatched(false))
+      await deleteDoc(docRef).then(() => setWatched(false));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col items-center p-10 ">
@@ -128,7 +138,9 @@ const Film = () => {
           </div>
           <p className="">{filmPageData.overview}</p>
           {watched ? (
-            <button onClick={deleteWatchedData} className="bg-green-900">Watched</button>
+            <button onClick={deleteWatchedData} className="bg-green-900">
+              Watched
+            </button>
           ) : (
             <button className="bg-slate-900" onClick={sendWatchedData}>
               Add to Watched
