@@ -5,3 +5,17 @@
 input[type="text"] {
   color: black;
 }
+
+input {
+  font-family: sans-serif;  
+}
+
+@font-face {
+  font-family: 'Subjectivity';
+  src: url('/Subjectivity/Subjectivity-Medium.woff2') format('woff2'),
+       url('/your-font.woff') format('woff');
+}
+
+body {
+  font-family: 'Subjectivity', sans-serif;
+}

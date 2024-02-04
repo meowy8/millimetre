@@ -37,7 +37,7 @@ const Profile = () => {
     getUserData();
   }, [userId]);
 
-  useEffect(() => console.log(userProfile));
+  //useEffect(() => console.log(userProfile));
 
   return (
     <>

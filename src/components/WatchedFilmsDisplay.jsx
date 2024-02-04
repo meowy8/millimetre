@@ -43,7 +43,7 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
     });
   }, [filmCatalogue, watchedFilmsId, setWatchedFilmsData]);
 
-  useEffect(() => console.log(numOfFilmsDisplayed), [numOfFilmsDisplayed]);
+  //useEffect(() => console.log(numOfFilmsDisplayed), [numOfFilmsDisplayed]);
 
   const changeView = () => {
     if (numOfFilmsDisplayed === 6) {
@@ -57,7 +57,7 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
     <div className="bg-[#150921] p-4">
       <div className="mb-2 flex justify-between">
         <div className="flex items-center gap-4">
-          <span className="text-lg">Watched</span>
+          <h1 className="text-lg">Watched</h1>
           <span className="font-light text-sm">
             {watchedFilmsData.length}/{filmCatalogue.length}
           </span>

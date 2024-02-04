@@ -48,7 +48,7 @@ const FavouriteFilmsDisplay = ({ username, userDataId }) => {
   return (
     <div className="bg-[#150921] p-4">
       <div className="mb-2">
-        <span className="text-lg">Favourites</span>
+        <h1 className="text-lg">Favourites</h1>
       </div>
       <div>
         {favFilmsData.length > 0 ? (

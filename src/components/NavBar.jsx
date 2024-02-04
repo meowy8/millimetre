@@ -9,7 +9,7 @@ const NavBar = () => {
   //console.log('user:', user)
 
   return (
-    <nav className="flex justify-between p-4 bg-[#28143e]">
+    <nav className="flex justify-between p-4 bg-[#28143e] font-custom">
       <div>
         <Link to="/">mm</Link>
       </div>
