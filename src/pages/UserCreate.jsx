@@ -61,7 +61,7 @@ const UserCreate = () => {
   const uploadFile = async () => {
     const mediaStorRef = ref(storage, "media/" + user.uid);
     await uploadBytes(mediaStorRef, fileToUpload).then(() =>
-      console.log("uploaded"),
+      console.log("uploaded")
     );
     await getDownloadURL(mediaStorRef).then((url) => setProfileImg(url));
   };
