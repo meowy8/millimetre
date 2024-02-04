@@ -22,7 +22,7 @@ const Film = () => {
 
         fetch(
           `https://api.themoviedb.org/3/movie/${filmId}?language=en-US`,
-          options,
+          options
         )
           .then((response) => response.json())
           .then((data) => {
@@ -33,13 +33,13 @@ const Film = () => {
 
         fetch(
           `https://api.themoviedb.org/3/movie/${filmId}/credits?language=en-US`,
-          options,
+          options
         )
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
             const directorsArr = data.crew.filter(
-              (member) => member.job === "Director",
+              (member) => member.job === "Director"
             );
             setDirectors(directorsArr);
           })
