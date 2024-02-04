@@ -4,7 +4,7 @@ const MediumFilmIcon = ({ id, posterUrl, filmTitle }) => {
   return (
     <div className="flex max-w-36 max-h-56 overflow-hidden rounded-sm">
       <Link to={`/film/${id}/${filmTitle}`}>
-        <img src={posterUrl} alt="" className=" flex h-full" />
+        <img src={posterUrl} alt="" className=" flex w-full h-full" />
       </Link>
     </div>
   );
