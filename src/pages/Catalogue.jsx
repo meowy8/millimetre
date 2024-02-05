@@ -5,7 +5,7 @@ import CatalogueSearchBar from "../components/CatalogueSearchBar";
 import ToggleFadedButton from "../components/ToggleFadedButton";
 
 const Catalogue = () => {
-  const { filmCatalogue, filmsWatchedData } = FilmCatalogue();
+  const { filmCatalogue } = FilmCatalogue();
 
   const [displaySearchBar, setdisplaySearchBar] = useState(false);
   const [searchInput, setSearchInput] = useState("");

@@ -102,7 +102,7 @@ export const FilmCatalogueProvider = ({ children }) => {
     }
   }, [user, checkFavouritesCount]);
 
-  useEffect(() => console.log(userWatchedFilmsData), [userWatchedFilmsData])
+  useEffect(() => console.log(userWatchedFilmsId), [userWatchedFilmsId])
 
   return (
     <FilmCatalogueContext.Provider
