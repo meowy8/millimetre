@@ -3,14 +3,19 @@ import { useEffect, useState } from "react";
 import { db } from "../firebaseConfig";
 import { FilmCatalogue } from "../context/FilmCatalogueContext";
 import MediumFilmIcon from "./MediumFilmIcon";
+import { UserAuth } from "../context/AuthContext";
 
 const WatchedFilmsDisplay = ({ username, userDataId }) => {
-  const [watchedFilmsId, setWatchedFilmsId] = useState([]);
   const [numOfFilmsDisplayed, setNumOfFilmsDisplayed] = useState(6);
+  const [profileWatchedFilmsId, setProfileWatchedFilmsId] = useState([]);
+  const [profileWatchedFilmsData, setProfileWatchedFilmsData] = useState([]);
 
-  const { filmCatalogue, watchedFilmsData, setWatchedFilmsData } = FilmCatalogue();
+  const { user } = UserAuth();
+
+  const { filmCatalogue } = FilmCatalogue();
 
   useEffect(() => {
+    setProfileWatchedFilmsId([])
     const fetchWatchedFilms = async () => {
       try {
         const watchedFilmsCollection = collection(
@@ -25,7 +30,7 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
           const watchedFilmsDocs = collectionSnapshot.docs;
 
           watchedFilmsDocs.forEach((film) => {
-            setWatchedFilmsId((prev) => [...prev, film.data().id]);
+            setProfileWatchedFilmsId((prev) => [...prev, film.data().id]);
           });
         }
       } catch (error) {
@@ -34,21 +39,21 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
     };
 
     fetchWatchedFilms();
-  }, [userDataId]);
+  }, [userDataId, setProfileWatchedFilmsId, user]);
 
   useEffect(() => {
-    setWatchedFilmsData([])
-    watchedFilmsId.forEach((id) => {
+    setProfileWatchedFilmsData([]);
+    profileWatchedFilmsId.forEach((id) => {
       const data = filmCatalogue.find((film) => film.id === id);
-      setWatchedFilmsData((prev) => [...prev, data]);
+      setProfileWatchedFilmsData((prev) => [...prev, data]);
     });
-  }, [filmCatalogue, watchedFilmsId, setWatchedFilmsData]);
+  }, [filmCatalogue, profileWatchedFilmsId, setProfileWatchedFilmsData]);
 
-  //useEffect(() => console.log(numOfFilmsDisplayed), [numOfFilmsDisplayed]);
+  //useEffect(() => console.log(watchedFilmsData), [watchedFilmsData]);
 
   const changeView = () => {
     if (numOfFilmsDisplayed === 6) {
-      setNumOfFilmsDisplayed(watchedFilmsData.length);
+      setNumOfFilmsDisplayed(profileWatchedFilmsData.length);
     } else {
       setNumOfFilmsDisplayed(6);
     }
@@ -60,11 +65,11 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
         <div className="flex items-center gap-4">
           <h1 className="text-lg">Watched</h1>
           <span className="font-light text-sm">
-            {watchedFilmsData.length}/{filmCatalogue.length}
+            {profileWatchedFilmsData.length}/{filmCatalogue.length}
           </span>
         </div>
         <div>
-          {watchedFilmsData.length > 6 ? (
+          {profileWatchedFilmsData.length > 6 ? (
             numOfFilmsDisplayed === 6 ? (
               <button onClick={changeView} className="text-sm">
                 Show More
@@ -78,9 +83,9 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
         </div>
       </div>
       <div>
-        {watchedFilmsData.length > 0 ? (
+        {profileWatchedFilmsData.length > 0 ? (
           <div className="grid grid-cols-3 gap-4">
-            {watchedFilmsData.map((film, index) => {
+            {profileWatchedFilmsData.map((film, index) => {
               if (index < numOfFilmsDisplayed) {
                 const filmTitle = film.title.toLowerCase().split(" ").join("-");
                 const posterUrl =

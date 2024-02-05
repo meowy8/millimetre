@@ -13,7 +13,8 @@ const FilmCatalogueContext = createContext();
 
 export const FilmCatalogueProvider = ({ children }) => {
   const [filmCatalogue, setFilmCatalogue] = useState([]);
-  const [watchedFilmsData, setWatchedFilmsData] = useState([]);
+  const [userWatchedFilmsData, setUserWatchedFilmsData] = useState([]);
+  const [userWatchedFilmsId, setUserWatchedFilmsId] = useState([]);
   const [favouritedFilmsData, setfavouritedFilmsData] = useState([]);
   const [favFilmsCount, setFavFilmsCount] = useState(null);
 
@@ -53,6 +54,34 @@ export const FilmCatalogueProvider = ({ children }) => {
     filmListFetch();
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      const fetchWatchedFilms = async () => {
+        try {
+          const watchedFilmsCollection = collection(
+            db,
+            "users",
+            user.uid,
+            "watched"
+          );
+          const collectionSnapshot = await getDocs(watchedFilmsCollection);
+  
+          if (!collectionSnapshot.empty) {
+            const watchedFilmsDocs = collectionSnapshot.docs;
+  
+            watchedFilmsDocs.forEach((film) => {
+              setUserWatchedFilmsId((prev) => [...prev, film.data().id]);
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+  
+      fetchWatchedFilms();
+    }
+  }, [user]);
+
   const checkFavouritesCount = useCallback(async () => {
     const collectionRef = collection(db, "users", user.uid, "favFilms");
     try {
@@ -73,19 +102,21 @@ export const FilmCatalogueProvider = ({ children }) => {
     }
   }, [user, checkFavouritesCount]);
 
-  //console.log('From context, film catalogue:', filmCatalogue)
+  useEffect(() => console.log(userWatchedFilmsData), [userWatchedFilmsData])
 
   return (
     <FilmCatalogueContext.Provider
       value={{
         filmCatalogue,
-        watchedFilmsData,
-        setWatchedFilmsData,
+        userWatchedFilmsData,
+        setUserWatchedFilmsData,
         favouritedFilmsData,
         setfavouritedFilmsData,
         favFilmsCount,
         setFavFilmsCount,
         checkFavouritesCount,
+        userWatchedFilmsId,
+        setUserWatchedFilmsId
       }}
     >
       {children}

@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import MediumFilmIcon from "../components/MediumFilmIcon";
 import { FilmCatalogue } from "../context/FilmCatalogueContext";
 import CatalogueSearchBar from "../components/CatalogueSearchBar";
+import ToggleFadedButton from "../components/ToggleFadedButton";
 
 const Catalogue = () => {
-  const { filmCatalogue } = FilmCatalogue();
+  const { filmCatalogue, filmsWatchedData } = FilmCatalogue();
 
   const [displaySearchBar, setdisplaySearchBar] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [filteredCatalogue, setFilteredCatalogue] = useState([]);
+  const [toggleFaded, setToggleFaded] = useState(false);
 
   useEffect(() => setFilteredCatalogue(filmCatalogue), [filmCatalogue]);
 
@@ -35,14 +37,28 @@ const Catalogue = () => {
     }
   };
 
+  const handleToggleChange = () => {
+    if (toggleFaded) {
+      setToggleFaded(false);
+    } else {
+      setToggleFaded(true);
+    }
+  };
+
   return (
     <div className="flex flex-col">
-      <CatalogueSearchBar
-        searchBarDisplay={searchBarDisplay}
-        displaySearchBar={displaySearchBar}
-        handleInputChange={handleInputChange}
-        searchInput={searchInput}
-      />
+      <div className="flex justify-between items-center">
+        <CatalogueSearchBar
+          searchBarDisplay={searchBarDisplay}
+          displaySearchBar={displaySearchBar}
+          handleInputChange={handleInputChange}
+          searchInput={searchInput}
+        />
+        <ToggleFadedButton
+          handleToggleChange={handleToggleChange}
+          togglefaded={toggleFaded}
+        />
+      </div>
       <div id="catalogue-container" className="grid grid-cols-3 gap-4">
         {filteredCatalogue.map((film) => {
           const posterUrl =
@@ -54,6 +70,7 @@ const Catalogue = () => {
               id={film.id}
               posterUrl={posterUrl}
               filmTitle={filmTitle}
+              toggleFaded={toggleFaded}
             />
           );
         })}
