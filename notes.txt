@@ -1,2 +1,4 @@
 - fade watched films
 - add toggle for fading
+
+- fix rendering of watched films display

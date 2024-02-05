@@ -37,6 +37,7 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
   }, [userDataId]);
 
   useEffect(() => {
+    setWatchedFilmsData([])
     watchedFilmsId.forEach((id) => {
       const data = filmCatalogue.find((film) => film.id === id);
       setWatchedFilmsData((prev) => [...prev, data]);
