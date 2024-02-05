@@ -1,10 +1,23 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useCallback,
+} from "react";
+import { db } from "../firebaseConfig";
+import { UserAuth } from "./AuthContext";
 
 const FilmCatalogueContext = createContext();
 
 export const FilmCatalogueProvider = ({ children }) => {
   const [filmCatalogue, setFilmCatalogue] = useState([]);
   const [watchedFilmsData, setWatchedFilmsData] = useState([]);
+  const [favouritedFilmsData, setfavouritedFilmsData] = useState([]);
+  const [favFilmsCount, setFavFilmsCount] = useState(null);
+
+  const { user } = UserAuth();
 
   useEffect(() => {
     const filmListFetch = async () => {
@@ -40,11 +53,40 @@ export const FilmCatalogueProvider = ({ children }) => {
     filmListFetch();
   }, []);
 
+  const checkFavouritesCount = useCallback(async () => {
+    const collectionRef = collection(db, "users", user.uid, "favFilms");
+    try {
+      const collectionSnap = await getDocs(collectionRef);
+      const count = collectionSnap.size;
+      return count;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      checkFavouritesCount(user.uid).then(
+        (count) => count !== null && setFavFilmsCount(count)
+      );
+    }
+  }, [user, checkFavouritesCount]);
+
   //console.log('From context, film catalogue:', filmCatalogue)
 
   return (
     <FilmCatalogueContext.Provider
-      value={{ filmCatalogue, watchedFilmsData, setWatchedFilmsData }}
+      value={{
+        filmCatalogue,
+        watchedFilmsData,
+        setWatchedFilmsData,
+        favouritedFilmsData,
+        setfavouritedFilmsData,
+        favFilmsCount,
+        setFavFilmsCount,
+        checkFavouritesCount,
+      }}
     >
       {children}
     </FilmCatalogueContext.Provider>

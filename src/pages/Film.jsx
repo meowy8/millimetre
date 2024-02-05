@@ -1,19 +1,39 @@
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LargeFilmIcon from "../components/LargeFilmIcon";
-import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  setDoc,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { UserAuth } from "../context/AuthContext";
+import AddToWatchedButton from "../components/AddToWatchedButton";
+import AddToFavouritesButton from "../components/AddToFavouritesButton";
+import { FilmCatalogue } from "../context/FilmCatalogueContext";
 
 const Film = () => {
   const [filmPageData, setFilmPageData] = useState({});
   const [directors, setDirectors] = useState([]);
   const [watched, setWatched] = useState(false);
+  const [favourited, setFavourited] = useState(false);
+  const [favSlotsFull, setFavSlotsFull] = useState(false);
 
   const { user } = UserAuth();
-  const navigate = useNavigate()
+  const { favFilmsCount, setFavFilmsCount, checkFavouritesCount } =
+    FilmCatalogue();
+  const navigate = useNavigate();
 
   const { filmId } = useParams();
+
+  useEffect(() => {
+    console.log("favourited?", favourited);
+    console.log("fav count?", favFilmsCount);
+    console.log("watched?", watched);
+  }, [favourited, favFilmsCount, watched]);
 
   useEffect(() => {
     const fetchFilmData = async () => {
@@ -68,9 +88,8 @@ const Film = () => {
           `${filmPageData.id}`
         );
         try {
-          await getDoc(docRef).then(
-            (response) => response.data() && setWatched(true)
-          );
+          const fetchedDoc = await getDoc(docRef);
+          fetchedDoc.exists() && setWatched(true);
         } catch (error) {
           console.log(error);
         }
@@ -80,9 +99,39 @@ const Film = () => {
     }
   }, [filmPageData, user]);
 
+  useEffect(() => {
+    if (user) {
+      const checkFavsList = async () => {
+        const docRef = doc(
+          db,
+          "users",
+          user.uid,
+          "favFilms",
+          `${filmPageData.id}`
+        );
+        try {
+          const fetchedData = await getDoc(docRef);
+          fetchedData.exists() ? setFavourited(true) : setFavourited(false);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      checkFavsList();
+    }
+  }, [filmPageData, user]);
+
+  useEffect(() => {
+    if (favFilmsCount === 3) {
+      setFavSlotsFull(true);
+    } else {
+      setFavSlotsFull(false)
+    }
+  }, [favFilmsCount]);
+
   const sendWatchedData = async () => {
     if (!user) {
-      navigate('/signin');
+      navigate("/signin");
     } else {
       const docRef = doc(
         db,
@@ -107,6 +156,39 @@ const Film = () => {
     const docRef = doc(db, "users", user.uid, "watched", `${filmPageData.id}`);
     try {
       await deleteDoc(docRef).then(() => setWatched(false));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const sendFavouritesData = async () => {
+    if (favFilmsCount < 3 && favFilmsCount !== null) {
+      const docRef = doc(
+        db,
+        "users",
+        user.uid,
+        "favFilms",
+        `${filmPageData.id}`
+      );
+      try {
+        await setDoc(docRef, {
+          id: filmPageData.id,
+          title: filmPageData.title,
+        }).then(() => {
+          setFavourited(true);
+          checkFavouritesCount().then((count) => setFavFilmsCount(count));
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const deleteFavouritesData = async () => {
+    const docRef = doc(db, "users", user.uid, "favFilms", `${filmPageData.id}`);
+    try {
+      await deleteDoc(docRef).then(() => setFavourited(false));
+      checkFavouritesCount().then((count) => setFavFilmsCount(count));
     } catch (error) {
       console.log(error);
     }
@@ -137,15 +219,17 @@ const Film = () => {
             })}
           </div>
           <p className="">{filmPageData.overview}</p>
-          {watched ? (
-            <button onClick={deleteWatchedData} className="bg-green-900">
-              Watched
-            </button>
-          ) : (
-            <button className="bg-slate-900" onClick={sendWatchedData}>
-              Add to Watched
-            </button>
-          )}
+          <AddToWatchedButton
+            deleteWatchedData={deleteWatchedData}
+            watched={watched}
+            sendWatchedData={sendWatchedData}
+          />
+            <AddToFavouritesButton
+              sendFavouritesData={sendFavouritesData}
+              favourited={favourited}
+              deleteFavouritesData={deleteFavouritesData}
+              favSlotsFull={favSlotsFull}
+            />
         </div>
       </div>
     </div>
