@@ -3,6 +3,7 @@ import MediumFilmIcon from "../components/MediumFilmIcon";
 import { FilmCatalogue } from "../context/FilmCatalogueContext";
 import CatalogueSearchBar from "../components/CatalogueSearchBar";
 import ToggleFadedButton from "../components/ToggleFadedButton";
+import { UserAuth } from "../context/AuthContext";
 
 const Catalogue = () => {
   const { filmCatalogue } = FilmCatalogue();
@@ -11,6 +12,8 @@ const Catalogue = () => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredCatalogue, setFilteredCatalogue] = useState([]);
   const [toggleFaded, setToggleFaded] = useState(false);
+
+  const {user} = UserAuth()
 
   useEffect(() => setFilteredCatalogue(filmCatalogue), [filmCatalogue]);
 
@@ -57,6 +60,7 @@ const Catalogue = () => {
         <ToggleFadedButton
           handleToggleChange={handleToggleChange}
           togglefaded={toggleFaded}
+          user={user}
         />
       </div>
       <div id="catalogue-container" className="grid grid-cols-3 gap-4">
