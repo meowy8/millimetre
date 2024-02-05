@@ -77,7 +77,7 @@ const UserCreate = () => {
         <label htmlFor="profile-img">
           Select Profile Image
           <div className="w-full flex flex-col items-center gap-4">
-            <input type="file" onChange={handleFile} />
+            <input type="file" id="profile-img" onChange={handleFile} />
             <div className="flex bg-red-400 w-32 h-32 rounded-full overflow-hidden">
               <img src={previewImage} alt="" className=" w-full " />
             </div>
@@ -88,6 +88,7 @@ const UserCreate = () => {
           <input
             type="text"
             value={username}
+            id="username"
             onChange={(e) => handleChange(e)}
           />
         </label>
