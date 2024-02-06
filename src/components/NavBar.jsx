@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import LogoutButton from "./LogoutButton";
 import { useEffect, useState } from "react";
-import SmallUserIcon from "./SmallUserIcon";
 
 const NavBar = () => {
   const [username, setUsername] = useState('')

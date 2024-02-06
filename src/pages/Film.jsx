@@ -14,6 +14,7 @@ import { UserAuth } from "../context/AuthContext";
 import AddToWatchedButton from "../components/AddToWatchedButton";
 import AddToFavouritesButton from "../components/AddToFavouritesButton";
 import { FilmCatalogue } from "../context/FilmCatalogueContext";
+import FilmNotes from "../components/FilmNotes";
 
 const Film = () => {
   const [filmPageData, setFilmPageData] = useState({});
@@ -125,7 +126,7 @@ const Film = () => {
     if (favFilmsCount === 3) {
       setFavSlotsFull(true);
     } else {
-      setFavSlotsFull(false)
+      setFavSlotsFull(false);
     }
   }, [favFilmsCount]);
 
@@ -224,12 +225,13 @@ const Film = () => {
             watched={watched}
             sendWatchedData={sendWatchedData}
           />
-            <AddToFavouritesButton
-              sendFavouritesData={sendFavouritesData}
-              favourited={favourited}
-              deleteFavouritesData={deleteFavouritesData}
-              favSlotsFull={favSlotsFull}
-            />
+          <AddToFavouritesButton
+            sendFavouritesData={sendFavouritesData}
+            favourited={favourited}
+            deleteFavouritesData={deleteFavouritesData}
+            favSlotsFull={favSlotsFull}
+          />
+          <FilmNotes />
         </div>
       </div>
     </div>
