@@ -10,6 +10,7 @@ import Film from "./pages/Film";
 import Catalogue from "./pages/Catalogue";
 import { FilmCatalogueProvider } from "./context/FilmCatalogueContext";
 import Settings from "./pages/Settings";
+import Notes from "./pages/Notes";
 
 function App() {
   const texturePath = "/texture.svg";
@@ -26,6 +27,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/film/:filmId/:title" element={<Film />} />
+              <Route path="/notes/:filmId/:title" element={<Notes />}/>
               <Route path="/catalogue" element={<Catalogue />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/usercreate" element={<UserCreate />} />

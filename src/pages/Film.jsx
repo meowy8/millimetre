@@ -28,7 +28,7 @@ const Film = () => {
     FilmCatalogue();
   const navigate = useNavigate();
 
-  const { filmId } = useParams();
+  const { filmId, title } = useParams();
 
   useEffect(() => {
     console.log("favourited?", favourited);
@@ -231,7 +231,7 @@ const Film = () => {
             deleteFavouritesData={deleteFavouritesData}
             favSlotsFull={favSlotsFull}
           />
-          <FilmNotes />
+          <FilmNotes filmId={filmId} title={title}/>
         </div>
       </div>
     </div>
