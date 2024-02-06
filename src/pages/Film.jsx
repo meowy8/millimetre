@@ -14,7 +14,7 @@ import { UserAuth } from "../context/AuthContext";
 import AddToWatchedButton from "../components/AddToWatchedButton";
 import AddToFavouritesButton from "../components/AddToFavouritesButton";
 import { FilmCatalogue } from "../context/FilmCatalogueContext";
-import FilmNotes from "../components/FilmNotes";
+import FilmNotesMini from "../components/FilmNotesMini";
 
 const Film = () => {
   const [filmPageData, setFilmPageData] = useState({});
@@ -231,7 +231,7 @@ const Film = () => {
             deleteFavouritesData={deleteFavouritesData}
             favSlotsFull={favSlotsFull}
           />
-          <FilmNotes filmId={filmId} title={title}/>
+          <FilmNotesMini filmId={filmId} title={title}/>
         </div>
       </div>
     </div>

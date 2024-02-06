@@ -6,6 +6,7 @@ import FavouriteFilmsDisplay from "../components/FavouriteFilmsDisplay";
 import UserBio from "../components/UserBio";
 import { UserAuth } from "../context/AuthContext";
 import WatchedFilmsDisplay from "../components/WatchedFilmsDisplay";
+import UserNotesMini from "../components/UserNotesMini";
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState(null);
@@ -67,6 +68,7 @@ const Profile = () => {
             username={userProfile.username}
             userDataId={userDocId}
           />
+          <UserNotesMini username={userProfile.username}/>
         </div>
       )}
     </>
