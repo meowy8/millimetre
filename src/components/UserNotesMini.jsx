@@ -20,7 +20,7 @@ const UserNotesMini = ({
       try {
         const notesSnapShot = await getDocs(collectionRef);
         const fetchedNotes = notesSnapShot.docs
-          .filter((note, index) => index < 3)
+          .filter((note, index) => index < 4)
           .map((note) => {
             const noteData = note.data();
             return {
@@ -31,6 +31,7 @@ const UserNotesMini = ({
               type: noteData.type,
               filmId: noteData.filmId,
               title: noteData.filmTitle,
+              userId: noteData.userId
             };
           });
         setListOfNotes(fetchedNotes);
@@ -53,9 +54,9 @@ const UserNotesMini = ({
       </div>
       <div className="flex flex-col gap-2">
         {listOfNotes.length > 0 ? (
-          listOfNotes.map((note) => {
+          listOfNotes.map((note, index) => {
             const urlTitle = note.title?.toLowerCase().split(" ").join("-");
-            return (
+            return index < 3 && (
               <NoteMain
                 key={note.noteId}
                 username={username}
@@ -65,13 +66,14 @@ const UserNotesMini = ({
                 urlTitle={urlTitle}
                 type={note.type}
                 filmId={note.filmId}
+                userId={note.userId}
               />
             );
           })
         ) : (
           <p className="text-sm">{username} has not created any notes yet...</p>
         )}
-        {listOfNotes.length > 0 && (
+        {listOfNotes.length > 3 && (
           <div className="flex justify-center p-2">
             <Link to={`/notes/${username}`} className="hover:underline">
               more...

@@ -230,6 +230,7 @@ const Film = () => {
         posterUrl: "https://image.tmdb.org/t/p/original/" + filmPageData.poster_path,
         filmTitle: filmPageData.title,
         type: 'user note',
+        userId: user.uid
       }).then(() => setDataSentToUserNotes(true));
     } catch (error) {
       console.log(error);

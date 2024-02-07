@@ -22,7 +22,7 @@ const CreateNoteModal = ({
     <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 backdrop-blur bg-black">
       <div
         style={{ backgroundImage: `url(${texturePath})` }}
-        className="bg-gray-950 p-4"
+        className="bg-gray-950 p-4 shadow-xl shadow-black"
       >
         <form
           action="submit"

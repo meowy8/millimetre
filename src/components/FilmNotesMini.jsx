@@ -63,6 +63,7 @@ const FilmNotesMini = ({ filmId, title, openModal }) => {
                 type={note.type}
                 filmId={note.filmId}
                 profileImg={note.profileImg}
+                userId={note.userId}
               />
             );
           }) : (

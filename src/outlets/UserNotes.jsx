@@ -45,6 +45,7 @@ const UserNotes = () => {
             type: noteData.type,
             filmId: noteData.filmId,
             title: noteData.filmTitle,
+            userId: noteData.userId
           };
         });
         setListOfNotes(fetchedNotes);
@@ -77,6 +78,7 @@ const UserNotes = () => {
                 displayTitle={note.title}
                 posterUrl={note.posterUrl}
                 type={note.type}
+                userId={note.userId}
               />
             );
           })
