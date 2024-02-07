@@ -6,6 +6,12 @@ const Home = () => {
   const [filmDisplay, setFilmDisplay] = useState(null);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0
+    });
+  }, []);
+
+  useEffect(() => {
     const filmListFetch = async () => {
       try {
         const options = {

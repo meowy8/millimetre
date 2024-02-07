@@ -7,10 +7,12 @@ import UserBio from "../components/UserBio";
 import { UserAuth } from "../context/AuthContext";
 import WatchedFilmsDisplay from "../components/WatchedFilmsDisplay";
 import UserNotesMini from "../components/UserNotesMini";
+import CreateNoteModal from "../components/CreateNoteModal";
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [userDocId, setUserDocId] = useState(null);
+
 
   const { userId } = useParams();
   const { user } = UserAuth();
@@ -38,6 +40,12 @@ const Profile = () => {
     getUserData();
   }, [userId]);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0
+    });
+  }, []);
+
   //useEffect(() => console.log(userProfile));
 
   return (
@@ -46,7 +54,11 @@ const Profile = () => {
         <div className="flex flex-col items-center gap-4">
           <h1 className="text-3xl">Profile</h1>
           <div className="bg-red-400 w-32 h-32 rounded-full overflow-hidden flex justify-center items-center">
-            <img src={userProfile.profileImg} alt="" className="flex w-full h-full object-cover" />
+            <img
+              src={userProfile.profileImg}
+              alt=""
+              className="flex w-full h-full object-cover"
+            />
           </div>
           {user?.uid === userDocId && (
             <Link
@@ -68,7 +80,11 @@ const Profile = () => {
             username={userProfile.username}
             userDataId={userDocId}
           />
-          <UserNotesMini username={userProfile.username}/>
+          <UserNotesMini
+            username={userProfile.username}
+            profileImg={userProfile.profileImg}
+            userDocId={userDocId}
+          />
         </div>
       )}
     </>

@@ -6,7 +6,7 @@ import { db } from "../firebaseConfig";
 
 const UserNotes = () => {
   const [listOfNotes, setListOfNotes] = useState([]);
-  const [userDocId, setUserDocId] = useState(null)
+  const [userDocId, setUserDocId] = useState(null);
 
   const { userId } = useParams();
 
@@ -29,36 +29,34 @@ const UserNotes = () => {
     };
 
     getUserData();
-  }, [userId])
+  }, [userId]);
 
   useEffect(() => {
     const fetchUserNotes = async () => {
-      const collectionRef = collection(db, 'users', `${userDocId}`, 'notes')
+      const collectionRef = collection(db, "users", `${userDocId}`, "notes");
       try {
         const notesSnapShot = await getDocs(collectionRef);
         const fetchedNotes = notesSnapShot.docs.map((note) => {
           const noteData = note.data();
           return {
             noteContent: noteData.noteContent,
-            id: noteData.id,
-            userId: noteData.userId,
-            postedBy: noteData.postedBy,
+            noteId: noteData.noteId,
             posterUrl: noteData.posterUrl,
             type: noteData.type,
             filmId: noteData.filmId,
-            title: noteData.title
+            title: noteData.filmTitle,
           };
         });
         setListOfNotes(fetchedNotes);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
 
-    fetchUserNotes()
-  }, [userDocId])
+    fetchUserNotes();
+  }, [userDocId]);
 
-  useEffect(() => console.log(listOfNotes), [listOfNotes])
+  useEffect(() => console.log(listOfNotes), [listOfNotes]);
 
   return (
     <div>
@@ -73,10 +71,10 @@ const UserNotes = () => {
           listOfNotes.map((note) => {
             return (
               <NoteMain
-                key={note.id}
+                key={note.noteId}
                 noteContent={note.noteContent}
                 filmId={note.filmId}
-                title={note.title}
+                displayTitle={note.title}
                 posterUrl={note.posterUrl}
                 type={note.type}
               />

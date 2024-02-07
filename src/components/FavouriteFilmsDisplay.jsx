@@ -53,7 +53,7 @@ const FavouriteFilmsDisplay = ({ username, userDataId }) => {
       <div>
         {favFilmsData.length > 0 ? (
           <div className="grid grid-cols-3 gap-4">
-            {favFilmsData.map((film) => {
+            {favFilmsData?.map((film) => {
               const filmTitle = film.title.toLowerCase().split(" ").join("-");
               const posterUrl =
                 "https://image.tmdb.org/t/p/original/" + film.poster_path;

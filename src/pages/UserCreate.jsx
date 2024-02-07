@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { UserAuth } from "../context/AuthContext";
@@ -15,7 +15,13 @@ const UserCreate = () => {
 
   const storage = getStorage();
   const navigate = useNavigate();
-
+  
+  useEffect(() => {
+    window.scrollTo({
+      top: 0
+    });
+  }, []);
+  
   if (userAccount) {
     return <Navigate to={"/"} />;
   }
@@ -23,6 +29,7 @@ const UserCreate = () => {
   if (!user) {
     return <Navigate to={"/signin"} />;
   }
+
 
   const handleChange = (e) => {
     setUsername(e.target.value);

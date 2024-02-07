@@ -13,13 +13,11 @@ const SignIn = () => {
 
   const navigate = useNavigate();
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await googleSignIn();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    window.scrollTo({
+      top: 0
+    });
+  }, []);
 
   useEffect(() => {
     const checkUserExists = async () => {
@@ -42,6 +40,15 @@ const SignIn = () => {
       }
     }
   }, [navigate, user, userExists, username])
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   return (
     <div className="flex flex-col items-center">

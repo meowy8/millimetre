@@ -15,6 +15,8 @@ import AddToWatchedButton from "../components/AddToWatchedButton";
 import AddToFavouritesButton from "../components/AddToFavouritesButton";
 import { FilmCatalogue } from "../context/FilmCatalogueContext";
 import FilmNotesMini from "../components/FilmNotesMini";
+import CreateNoteModal from "../components/CreateNoteModal";
+import generateRandomID from "../functions/generateRandomId";
 
 const Film = () => {
   const [filmPageData, setFilmPageData] = useState({});
@@ -22,8 +24,13 @@ const Film = () => {
   const [watched, setWatched] = useState(false);
   const [favourited, setFavourited] = useState(false);
   const [favSlotsFull, setFavSlotsFull] = useState(false);
+  const [modalDisplay, setModalDisplay] = useState(false);
+  const [noteContent, setNoteContent] = useState('');
+  const [dataSentToUserNotes, setDataSentToUserNotes] = useState(false)
+  const [dataSentToFilmNotes, setDataSentToFilmNotes] = useState(false)
 
-  const { user } = UserAuth();
+
+  const { user, userAccount } = UserAuth();
   const { favFilmsCount, setFavFilmsCount, checkFavouritesCount } =
     FilmCatalogue();
   const navigate = useNavigate();
@@ -31,10 +38,20 @@ const Film = () => {
   const { filmId, title } = useParams();
 
   useEffect(() => {
-    console.log("favourited?", favourited);
-    console.log("fav count?", favFilmsCount);
-    console.log("watched?", watched);
-  }, [favourited, favFilmsCount, watched]);
+    // console.log("favourited?", favourited);
+    // console.log("fav count?", favFilmsCount);
+    // console.log("watched?", watched);
+    //console.log('modal display:', modalDisplay)
+    // console.log("note content:", noteContent);
+    // console.log('film page data:', filmPageData)
+    console.log('user account:', userAccount)
+  }, [favourited, favFilmsCount, watched, modalDisplay, noteContent, filmPageData, userAccount]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0
+    });
+  }, []);
 
   useEffect(() => {
     const fetchFilmData = async () => {
@@ -195,45 +212,113 @@ const Film = () => {
     }
   };
 
+  const closeModal = () => {
+    setModalDisplay(false);
+  };
+
+  const openModal = () => {
+    setModalDisplay(true)
+  }
+
+  const sendNotetoUserNotes = async (noteId) => {
+    const docRef = doc(db, "users", user.uid, "notes", noteId);
+    try {
+      await setDoc(docRef, {
+        filmId,
+        noteId,
+        noteContent,
+        posterUrl: "https://image.tmdb.org/t/p/original/" + filmPageData.poster_path,
+        filmTitle: filmPageData.title,
+        type: 'user note',
+      }).then(() => setDataSentToUserNotes(true));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const sendNotetoFilmNotes = async (noteId) => {
+    const docRef = doc(db, "filmNotes", filmId, "notes", noteId);
+    try {
+      await setDoc(docRef, {
+        filmId,
+        noteId,
+        noteContent,
+        postedBy: userAccount.username,
+        profileImg: userAccount.profileImg,
+        filmTitle: filmPageData.title,
+        type: 'film note',
+        userId: user.uid 
+      }).then(() => setDataSentToFilmNotes(true));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const sendAllNoteData = () => {
+    const noteId = generateRandomID();
+    sendNotetoFilmNotes(noteId);
+    sendNotetoUserNotes(noteId);
+  };
+  
+  useEffect(() => {
+    dataSentToFilmNotes && dataSentToUserNotes ? closeModal() : null
+  }, [dataSentToFilmNotes, dataSentToUserNotes])
+
   return (
-    <div className="flex flex-col items-center p-10 ">
-      <div className="flex flex-col gap-10">
-        <div className="flex justify-center">
-          <LargeFilmIcon
-            posterUrl={
-              "https://image.tmdb.org/t/p/original/" + filmPageData.poster_path
-            }
-          />
-        </div>
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <h1 className="text-2xl font-semibold">{filmPageData.title}</h1>
-            {directors.map((director) => {
-              return (
-                <span
-                  key={director.id}
-                  className="text-md font-light text-slate-400"
-                >
-                  {director.name}
-                </span>
-              );
-            })}
+    <div>
+      <div className="flex flex-col items-center p-10 ">
+        <div className="flex flex-col gap-10">
+          <div className="flex justify-center">
+            <LargeFilmIcon
+              posterUrl={
+                "https://image.tmdb.org/t/p/original/" +
+                filmPageData.poster_path
+              }
+            />
           </div>
-          <p className="">{filmPageData.overview}</p>
-          <AddToWatchedButton
-            deleteWatchedData={deleteWatchedData}
-            watched={watched}
-            sendWatchedData={sendWatchedData}
-          />
-          <AddToFavouritesButton
-            sendFavouritesData={sendFavouritesData}
-            favourited={favourited}
-            deleteFavouritesData={deleteFavouritesData}
-            favSlotsFull={favSlotsFull}
-          />
-          <FilmNotesMini filmId={filmId} title={title}/>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <h1 className="text-2xl font-semibold">{filmPageData.title}</h1>
+              {directors.map((director) => {
+                return (
+                  <span
+                    key={director.id}
+                    className="text-md font-light text-slate-400"
+                  >
+                    {director.name}
+                  </span>
+                );
+              })}
+            </div>
+            <p className="">{filmPageData.overview}</p>
+            <AddToWatchedButton
+              deleteWatchedData={deleteWatchedData}
+              watched={watched}
+              sendWatchedData={sendWatchedData}
+            />
+            <AddToFavouritesButton
+              sendFavouritesData={sendFavouritesData}
+              favourited={favourited}
+              deleteFavouritesData={deleteFavouritesData}
+              favSlotsFull={favSlotsFull}
+            />
+            <FilmNotesMini
+              filmId={filmId}
+              title={title}
+              openModal={openModal}
+            />
+          </div>
         </div>
       </div>
+      {modalDisplay && (
+        <CreateNoteModal
+          sendAllNoteData={sendAllNoteData}
+          noteContent={noteContent}
+          setNoteContent={setNoteContent}
+          filmTitle={filmPageData.title}
+          closeModal={closeModal}
+        />
+      )}
     </div>
   );
 };

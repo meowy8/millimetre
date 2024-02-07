@@ -24,6 +24,12 @@ const Settings = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0
+    });
+  }, []);
+
+  useEffect(() => {
     setPreviewImage(userAccount?.profileImg);
     setProfileImg(userAccount?.profileImg);
   }, [userAccount]);

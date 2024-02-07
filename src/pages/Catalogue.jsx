@@ -15,6 +15,12 @@ const Catalogue = () => {
 
   const {user} = UserAuth()
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0
+    });
+  }, []);
+
   useEffect(() => setFilteredCatalogue(filmCatalogue), [filmCatalogue]);
 
   const searchBarDisplay = () => {

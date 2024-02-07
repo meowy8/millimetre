@@ -14,7 +14,6 @@ const FilmNotes = () => {
   const { filmId, title } = useParams();
 
   useEffect(() => {
-    
     const fetchFilmNotes = async () => {
       const collectionRef = collection(db, "filmNotes", filmId, "notes");
       try {
@@ -23,10 +22,13 @@ const FilmNotes = () => {
           const noteData = note.data();
           return {
             noteContent: noteData.noteContent,
-            id: noteData.id,
+            noteId: noteData.noteId,
             userId: noteData.userId,
             postedBy: noteData.postedBy,
             profileImg: noteData.profileImg,
+            type: noteData.type,
+            title: noteData.filmTitle,
+            filmId: noteData.filmId
           };
         });
         setListOfNotes(fetchedNotes);
@@ -43,8 +45,7 @@ const FilmNotes = () => {
     setFilmData(data)
   }, [filmCatalogue, filmId]);
 
-  useEffect(() => console.log(filmData), [filmData]);
-  useEffect(() => console.log(filmCatalogue))
+  useEffect(() => console.log(listOfNotes), [listOfNotes]);
   return (
     <div>
       <h1 className="m-4 flex gap-2">
@@ -56,12 +57,18 @@ const FilmNotes = () => {
       <div className="flex flex-col gap-4">
         {listOfNotes.length > 0 ? (
           listOfNotes.map((note) => {
+            const urlTitle = note.title?.toLowerCase().split(" ").join("-");
             return (
               <NoteMain
-                key={note.id}
+                key={note.noteId}
+                posterUrl={note.posterUrl}
                 noteContent={note.noteContent}
-                postedBy={note.postedBy}
+                displayTitle={note.title}
+                urlTitle={urlTitle}
+                type={note.type}
+                filmId={note.filmId}
                 profileImg={note.profileImg}
+                username={note.postedBy}
               />
             );
           })
