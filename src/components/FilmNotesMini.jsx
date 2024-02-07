@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom"
 import FilmNote from "./FilmNote"
 
 const FilmNotesMini = ({filmId, title}) => {
   return (
     <div className="bg-[#150921] p-4">
-      <h1 className="text-xl">Notes</h1>
+      <Link className="text-xl hover:underline" to={`/notes/${filmId}/${title}`}>Notes</Link>
       <div>
         <FilmNote filmId={filmId} title={title}/>
       </div>
