@@ -15,7 +15,7 @@ const SignIn = () => {
 
   useEffect(() => {
     window.scrollTo({
-      top: 0
+      top: 0,
     });
   }, []);
 
@@ -27,10 +27,10 @@ const SignIn = () => {
         setUsername(userDoc.data().username);
         setUserExists(userDoc.exists());
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     };
-  
+
     if (user) {
       checkUserExists();
       if (userExists) {
@@ -39,7 +39,7 @@ const SignIn = () => {
         navigate("/usercreate");
       }
     }
-  }, [navigate, user, userExists, username])
+  }, [navigate, user, userExists, username]);
 
   const handleGoogleSignIn = async () => {
     try {
@@ -48,7 +48,6 @@ const SignIn = () => {
       console.log(error);
     }
   };
-
 
   return (
     <div className="flex flex-col items-center">

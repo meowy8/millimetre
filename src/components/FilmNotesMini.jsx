@@ -5,7 +5,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import NoteMain from "./NoteMain";
 
-const FilmNotesMini = ({ filmId, title, openModal }) => {
+const FilmNotesMini = ({ filmId, title, openModal, user }) => {
   const [listOfNotes, setListOfNotes] = useState([]);
 
   useEffect(() => {
@@ -44,17 +44,20 @@ const FilmNotesMini = ({ filmId, title, openModal }) => {
         >
           Notes
         </Link>
-        <button onClick={openModal} className="text-sm">
-          + Create new note
-        </button>
+        {user && (
+          <button onClick={openModal} className="text-sm">
+            + Create new note
+          </button>
+        )}
       </div>
       <div className="flex flex-col gap-2">
-        {listOfNotes.length > 0 ?
+        {listOfNotes.length > 0 ? (
           listOfNotes.map((note) => {
             const urlTitle = note.title?.toLowerCase().split(" ").join("-");
             return (
               <NoteMain
                 key={note.noteId}
+                noteId={note.noteId}
                 username={note.postedBy}
                 posterUrl={note.posterUrl}
                 noteContent={note.noteContent}
@@ -66,9 +69,12 @@ const FilmNotesMini = ({ filmId, title, openModal }) => {
                 userId={note.userId}
               />
             );
-          }) : (
-            <p className="text-sm">There are no notes for this film yet...</p>
-          )}
+          })
+        ) : (
+          <p className="text-sm">
+            No notes have been created for this film yet...
+          </p>
+        )}
       </div>
     </div>
   );

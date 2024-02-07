@@ -15,7 +15,7 @@ const UserNotes = () => {
       const usersCollection = collection(db, "users");
       const usernameQuery = query(
         usersCollection,
-        where("username", "==", userId)
+        where("username", "==", userId),
       );
       const querySnapshot = await getDocs(usernameQuery);
 
@@ -45,7 +45,7 @@ const UserNotes = () => {
             type: noteData.type,
             filmId: noteData.filmId,
             title: noteData.filmTitle,
-            userId: noteData.userId
+            userId: noteData.userId,
           };
         });
         setListOfNotes(fetchedNotes);
@@ -70,14 +70,19 @@ const UserNotes = () => {
       <div className="flex flex-col gap-4 m-2">
         {listOfNotes.length > 0 ? (
           listOfNotes.map((note) => {
+            const urlTitle = note.title?.toLowerCase().split(" ").join("-");
             return (
               <NoteMain
                 key={note.noteId}
-                noteContent={note.noteContent}
-                filmId={note.filmId}
-                displayTitle={note.title}
+                noteId={note.noteId}
+                username={note.postedBy}
                 posterUrl={note.posterUrl}
+                noteContent={note.noteContent}
+                displayTitle={note.title}
+                urlTitle={urlTitle}
                 type={note.type}
+                filmId={note.filmId}
+                profileImg={note.profileImg}
                 userId={note.userId}
               />
             );

@@ -1,4 +1,9 @@
-const CatalogueSearchBar = ({ displaySearchBar, searchBarDisplay, handleInputChange, searchInput }) => {
+const CatalogueSearchBar = ({
+  displaySearchBar,
+  searchBarDisplay,
+  handleInputChange,
+  searchInput,
+}) => {
   return (
     <div className="pl-4 pb-4">
       {!displaySearchBar ? (

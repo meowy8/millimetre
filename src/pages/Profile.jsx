@@ -13,7 +13,6 @@ const Profile = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [userDocId, setUserDocId] = useState(null);
 
-
   const { userId } = useParams();
   const { user } = UserAuth();
 
@@ -23,7 +22,7 @@ const Profile = () => {
       const usersCollection = collection(db, "users");
       const usernameQuery = query(
         usersCollection,
-        where("username", "==", userId)
+        where("username", "==", userId),
       );
       const querySnapshot = await getDocs(usernameQuery);
 
@@ -42,7 +41,7 @@ const Profile = () => {
 
   useEffect(() => {
     window.scrollTo({
-      top: 0
+      top: 0,
     });
   }, []);
 

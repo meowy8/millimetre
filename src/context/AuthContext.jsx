@@ -55,7 +55,7 @@ export const AuthContextProvider = ({ children }) => {
     signOut(auth);
   };
 
-  console.log(userAccount)
+  console.log(userAccount);
 
   return (
     <AuthContext.Provider

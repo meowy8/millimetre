@@ -17,7 +17,7 @@ const FavouriteFilmsDisplay = ({ username, userDataId }) => {
           db,
           "users",
           userDataId,
-          "favFilms"
+          "favFilms",
         );
         const collectionSnapshot = await getDocs(favFilmsCollection);
 
@@ -54,13 +54,13 @@ const FavouriteFilmsDisplay = ({ username, userDataId }) => {
         {favFilmsData.length > 0 ? (
           <div className="grid grid-cols-3 gap-4">
             {favFilmsData?.map((film) => {
-              const filmTitle = film.title.toLowerCase().split(" ").join("-");
+              const filmTitle = film?.title?.toLowerCase().split(" ").join("-");
               const posterUrl =
-                "https://image.tmdb.org/t/p/original/" + film.poster_path;
+                "https://image.tmdb.org/t/p/original/" + film?.poster_path;
               return (
                 <MediumFilmIcon
-                  key={film.id}
-                  id={film.id}
+                  key={film?.id}
+                  id={film?.id}
                   filmTitle={filmTitle}
                   posterUrl={posterUrl}
                 />

@@ -1,22 +1,40 @@
-const CreateNoteModal = ({
+import { useEffect } from "react";
+
+const EditNoteModal = ({
   sendAllNoteData,
   noteContent,
-  setNoteContent,
-  filmTitle,
+  newNoteContent,
+  setNewNoteContent,
   closeModal,
+  filmTitle,
+  deleteNoteData,
 }) => {
   const texturePath = "/texture.svg";
 
+  useEffect(
+    () => setNewNoteContent(noteContent),
+    [noteContent, setNewNoteContent],
+  );
+
   const handleChange = (e) => {
-    setNoteContent(e.target.value);
+    setNewNoteContent(e.target.value);
   };
 
   const handleSave = (e) => {
     e.preventDefault();
-    if (noteContent) {
+    if (newNoteContent) {
       sendAllNoteData();
     }
   };
+
+  const handleDelete = () => {
+    deleteNoteData();
+    closeModal();
+  };
+
+  useEffect(() => {
+    console.log(newNoteContent);
+  }, [newNoteContent]);
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 backdrop-blur bg-black">
@@ -31,8 +49,7 @@ const CreateNoteModal = ({
         >
           <div className="flex justify-between">
             <h1 className="text-lg">
-              Create Note for{" "}
-              <span className=" text-gray-400">{filmTitle}</span>
+              Edit Note for <span className=" text-gray-400">{filmTitle}</span>
             </h1>
             <button
               type="button"
@@ -48,15 +65,26 @@ const CreateNoteModal = ({
             <input
               type="text"
               id="note"
-              value={noteContent}
+              value={newNoteContent}
               onChange={handleChange}
             />
           </label>
-          <button type="submit">Save Note</button>
+          <div className="flex justify-between">
+            <button type="submit" className="bg-green-800 p-1 rounded-md">
+              Save Note
+            </button>
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="bg-red-800 p-1 rounded-md"
+            >
+              Delete
+            </button>
+          </div>
         </form>
       </div>
     </div>
   );
 };
 
-export default CreateNoteModal;
+export default EditNoteModal;

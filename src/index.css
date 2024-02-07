@@ -7,14 +7,14 @@ input[type="text"] {
 }
 
 input {
-  font-family: sans-serif;  
+  font-family: sans-serif;
 }
 
 @font-face {
-  font-family: 'Subjectivity';
-  src: url('/Subjectivity/Subjectivity-Medium.woff2') format('woff2')
+  font-family: "Subjectivity";
+  src: url("/Subjectivity/Subjectivity-Medium.woff2") format("woff2");
 }
 
 body {
-  font-family: 'Subjectivity', sans-serif;
+  font-family: "Subjectivity", sans-serif;
 }

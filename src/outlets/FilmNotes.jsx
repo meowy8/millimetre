@@ -7,7 +7,7 @@ import { FilmCatalogue } from "../context/FilmCatalogueContext";
 
 const FilmNotes = () => {
   const [listOfNotes, setListOfNotes] = useState([]);
-  const [filmData, setFilmData] = useState([])
+  const [filmData, setFilmData] = useState([]);
 
   const { filmCatalogue } = FilmCatalogue();
 
@@ -28,7 +28,7 @@ const FilmNotes = () => {
             profileImg: noteData.profileImg,
             type: noteData.type,
             title: noteData.filmTitle,
-            filmId: noteData.filmId
+            filmId: noteData.filmId,
           };
         });
         setListOfNotes(fetchedNotes);
@@ -41,19 +41,19 @@ const FilmNotes = () => {
   }, [filmId]);
 
   useEffect(() => {
-    const data = filmCatalogue.find(film => film.id === parseInt(filmId))
-    setFilmData(data)
+    const data = filmCatalogue.find((film) => film.id === parseInt(filmId));
+    setFilmData(data);
   }, [filmCatalogue, filmId]);
 
   useEffect(() => console.log(listOfNotes), [listOfNotes]);
   return (
     <div>
       <h1 className="m-4 flex gap-2">
-        Notes for 
+        Notes for
         <Link to={`/film/${filmId}/${title}`} className="hover:underline">
           {filmData?.title}
         </Link>
-        </h1>
+      </h1>
       <div className="flex flex-col gap-4">
         {listOfNotes.length > 0 ? (
           listOfNotes.map((note) => {
@@ -61,6 +61,8 @@ const FilmNotes = () => {
             return (
               <NoteMain
                 key={note.noteId}
+                noteId={note.noteId}
+                username={note.postedBy}
                 posterUrl={note.posterUrl}
                 noteContent={note.noteContent}
                 displayTitle={note.title}
@@ -68,12 +70,14 @@ const FilmNotes = () => {
                 type={note.type}
                 filmId={note.filmId}
                 profileImg={note.profileImg}
-                username={note.postedBy}
+                userId={note.userId}
               />
             );
           })
         ) : (
-          <p className="text-sm">No notes have been created for this film yet...</p>
+          <p className="text-sm">
+            No notes have been created for this film yet...
+          </p>
         )}
       </div>
     </div>

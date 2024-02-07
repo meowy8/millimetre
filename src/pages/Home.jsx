@@ -7,7 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     window.scrollTo({
-      top: 0
+      top: 0,
     });
   }, []);
 
@@ -25,7 +25,7 @@ const Home = () => {
 
         fetch(
           `https://api.themoviedb.org/3/list/8289621?language=en-US&page=1`,
-          options
+          options,
         )
           .then((response) => response.json())
           .then((data) => {

@@ -25,10 +25,9 @@ const Film = () => {
   const [favourited, setFavourited] = useState(false);
   const [favSlotsFull, setFavSlotsFull] = useState(false);
   const [modalDisplay, setModalDisplay] = useState(false);
-  const [noteContent, setNoteContent] = useState('');
-  const [dataSentToUserNotes, setDataSentToUserNotes] = useState(false)
-  const [dataSentToFilmNotes, setDataSentToFilmNotes] = useState(false)
-
+  const [noteContent, setNoteContent] = useState("");
+  const [dataSentToUserNotes, setDataSentToUserNotes] = useState(false);
+  const [dataSentToFilmNotes, setDataSentToFilmNotes] = useState(false);
 
   const { user, userAccount } = UserAuth();
   const { favFilmsCount, setFavFilmsCount, checkFavouritesCount } =
@@ -44,12 +43,20 @@ const Film = () => {
     //console.log('modal display:', modalDisplay)
     // console.log("note content:", noteContent);
     // console.log('film page data:', filmPageData)
-    console.log('user account:', userAccount)
-  }, [favourited, favFilmsCount, watched, modalDisplay, noteContent, filmPageData, userAccount]);
+    console.log("user account:", userAccount);
+  }, [
+    favourited,
+    favFilmsCount,
+    watched,
+    modalDisplay,
+    noteContent,
+    filmPageData,
+    userAccount,
+  ]);
 
   useEffect(() => {
     window.scrollTo({
-      top: 0
+      top: 0,
     });
   }, []);
 
@@ -67,7 +74,7 @@ const Film = () => {
 
         fetch(
           `https://api.themoviedb.org/3/movie/${filmId}?language=en-US`,
-          options
+          options,
         )
           .then((response) => response.json())
           .then((data) => {
@@ -77,12 +84,12 @@ const Film = () => {
 
         fetch(
           `https://api.themoviedb.org/3/movie/${filmId}/credits?language=en-US`,
-          options
+          options,
         )
           .then((response) => response.json())
           .then((data) => {
             const directorsArr = data.crew.filter(
-              (member) => member.job === "Director"
+              (member) => member.job === "Director",
             );
             setDirectors(directorsArr);
           })
@@ -103,7 +110,7 @@ const Film = () => {
           "users",
           user.uid,
           "watched",
-          `${filmPageData.id}`
+          `${filmPageData.id}`,
         );
         try {
           const fetchedDoc = await getDoc(docRef);
@@ -125,7 +132,7 @@ const Film = () => {
           "users",
           user.uid,
           "favFilms",
-          `${filmPageData.id}`
+          `${filmPageData.id}`,
         );
         try {
           const fetchedData = await getDoc(docRef);
@@ -156,7 +163,7 @@ const Film = () => {
         "users",
         user.uid,
         "watched",
-        `${filmPageData.id}`
+        `${filmPageData.id}`,
       );
       try {
         await setDoc(docRef, {
@@ -180,13 +187,15 @@ const Film = () => {
   };
 
   const sendFavouritesData = async () => {
-    if (favFilmsCount < 3 && favFilmsCount !== null) {
+    if (!user) {
+      navigate("/signin");
+    } else if (favFilmsCount < 3 && favFilmsCount !== null) {
       const docRef = doc(
         db,
         "users",
         user.uid,
         "favFilms",
-        `${filmPageData.id}`
+        `${filmPageData.id}`,
       );
       try {
         await setDoc(docRef, {
@@ -217,8 +226,8 @@ const Film = () => {
   };
 
   const openModal = () => {
-    setModalDisplay(true)
-  }
+    setModalDisplay(true);
+  };
 
   const sendNotetoUserNotes = async (noteId) => {
     const docRef = doc(db, "users", user.uid, "notes", noteId);
@@ -227,10 +236,11 @@ const Film = () => {
         filmId,
         noteId,
         noteContent,
-        posterUrl: "https://image.tmdb.org/t/p/original/" + filmPageData.poster_path,
+        posterUrl:
+          "https://image.tmdb.org/t/p/original/" + filmPageData.poster_path,
         filmTitle: filmPageData.title,
-        type: 'user note',
-        userId: user.uid
+        type: "user note",
+        userId: user.uid,
       }).then(() => setDataSentToUserNotes(true));
     } catch (error) {
       console.log(error);
@@ -247,8 +257,8 @@ const Film = () => {
         postedBy: userAccount.username,
         profileImg: userAccount.profileImg,
         filmTitle: filmPageData.title,
-        type: 'film note',
-        userId: user.uid 
+        type: "film note",
+        userId: user.uid,
       }).then(() => setDataSentToFilmNotes(true));
     } catch (error) {
       console.log(error);
@@ -260,10 +270,10 @@ const Film = () => {
     sendNotetoFilmNotes(noteId);
     sendNotetoUserNotes(noteId);
   };
-  
+
   useEffect(() => {
-    dataSentToFilmNotes && dataSentToUserNotes ? closeModal() : null
-  }, [dataSentToFilmNotes, dataSentToUserNotes])
+    dataSentToFilmNotes && dataSentToUserNotes ? closeModal() : null;
+  }, [dataSentToFilmNotes, dataSentToUserNotes]);
 
   return (
     <div>
@@ -307,6 +317,7 @@ const Film = () => {
               filmId={filmId}
               title={title}
               openModal={openModal}
+              user={user}
             />
           </div>
         </div>

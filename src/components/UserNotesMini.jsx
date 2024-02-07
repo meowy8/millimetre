@@ -31,7 +31,7 @@ const UserNotesMini = ({
               type: noteData.type,
               filmId: noteData.filmId,
               title: noteData.filmTitle,
-              userId: noteData.userId
+              userId: noteData.userId,
             };
           });
         setListOfNotes(fetchedNotes);
@@ -56,18 +56,21 @@ const UserNotesMini = ({
         {listOfNotes.length > 0 ? (
           listOfNotes.map((note, index) => {
             const urlTitle = note.title?.toLowerCase().split(" ").join("-");
-            return index < 3 && (
-              <NoteMain
-                key={note.noteId}
-                username={username}
-                posterUrl={note.posterUrl}
-                noteContent={note.noteContent}
-                displayTitle={note.title}
-                urlTitle={urlTitle}
-                type={note.type}
-                filmId={note.filmId}
-                userId={note.userId}
-              />
+            return (
+              index < 3 && (
+                <NoteMain
+                  key={note.noteId}
+                  noteId={note.noteId}
+                  username={username}
+                  posterUrl={note.posterUrl}
+                  noteContent={note.noteContent}
+                  displayTitle={note.title}
+                  urlTitle={urlTitle}
+                  type={note.type}
+                  filmId={note.filmId}
+                  userId={note.userId}
+                />
+              )
             );
           })
         ) : (
