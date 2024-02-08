@@ -20,23 +20,25 @@ const NavBar = () => {
   //console.log('user:', user)
 
   return (
-    <nav className="flex justify-between items-center p-4 bg-[#231236] border-b border-black">
-      <div>
-        <Link to="/">
-          <h1 className="main-title text-2xl">MILLIMETRE</h1>
-        </Link>
-      </div>
-      <div className="flex gap-4 items-center">
-        {user && (
-          <Link to={`/user/${username}`} className="flex items-center gap-2">
-            <div className="flex w-8 h-8 rounded-full overflow-hidden justify-center">
-              <img src={profileImg} alt="" className="flex w-full h-full" />
-            </div>
-            <span className="username">{username}</span>
+    <nav className=" flex justify-center p-4 bg-[#231236] border-b border-black">
+      <div className="flex justify-between items-center w-full md:w-4/5 lg:w-3/5">
+        <div>
+          <Link to="/">
+            <h1 className="main-title text-2xl">MILLIMETRE</h1>
           </Link>
-        )}
-        <Link to={"/catalogue"}>Catalogue</Link>
-        {user ? <LogoutButton /> : <Link to="/signin">Sign In</Link>}
+        </div>
+        <div className="flex gap-4 items-center">
+          {user && (
+            <Link to={`/user/${username}`} className="flex items-center gap-2">
+              <div className="flex w-8 h-8 rounded-full overflow-hidden justify-center">
+                <img src={profileImg} alt="" className="flex w-full h-full" />
+              </div>
+              <span className="username">{username}</span>
+            </Link>
+          )}
+          <Link to={"/catalogue"}>Catalogue</Link>
+          {user ? <LogoutButton /> : <Link to="/signin">Sign In</Link>}
+        </div>
       </div>
     </nav>
   );
