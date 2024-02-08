@@ -52,6 +52,11 @@ input {
   src: url("/Fonts/Open_Sans/static/OpenSans_Condensed-Italic.ttf")
     format("truetype");
 }
+@font-face {
+  font-family: "Open Sans Light";
+  src: url("/Fonts/Open_Sans/static/OpenSans-Light.ttf")
+    format("truetype");
+}
 
 body {
   font-family: "Open Sans", serif;

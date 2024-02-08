@@ -1,6 +1,7 @@
 import MediumFilmIcon from "../components/MediumFilmIcon";
 import UserList from "../components/UserList";
 import { useEffect, useState } from "react";
+import WelcomeSection from "../components/WelcomeSection";
 
 const Home = () => {
   const [filmDisplay, setFilmDisplay] = useState(null);
@@ -44,10 +45,10 @@ const Home = () => {
 
   return (
     <div className="flex flex-col items-center h-screen">
-      <h1 className="text-3xl m-10">Home</h1>
+      <WelcomeSection />
       <div
         id="films-container"
-        className="bg-[#2a1f35] flex items-center justify-center py-4 px-10 rounded-xl"
+        className="bg-[#2a1f35] flex items-center justify-center py-4 px-10 rounded-xl mt-10"
       >
         <div className="grid grid-cols-2 gap-4">
           {filmDisplay?.map((film) => {
