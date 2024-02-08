@@ -2,6 +2,7 @@ import MediumFilmIcon from "../components/MediumFilmIcon";
 import UserList from "../components/UserList";
 import { useEffect, useState } from "react";
 import WelcomeSection from "../components/WelcomeSection";
+import HomeFilmDisplay from "../components/HomeFilmDisplay";
 
 const Home = () => {
   const [filmDisplay, setFilmDisplay] = useState(null);
@@ -26,7 +27,7 @@ const Home = () => {
 
         fetch(
           `https://api.themoviedb.org/3/list/8289621?language=en-US&page=1`,
-          options,
+          options
         )
           .then((response) => response.json())
           .then((data) => {
@@ -44,28 +45,9 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center h-screen">
+    <div className="flex flex-col gap-8 items-center">
       <WelcomeSection />
-      <div
-        id="films-container"
-        className="bg-[#2a1f35] flex items-center justify-center py-4 px-10 rounded-xl mt-10"
-      >
-        <div className="grid grid-cols-2 gap-4">
-          {filmDisplay?.map((film) => {
-            const filmTitle = film.title.toLowerCase().split(" ").join("-");
-            const posterUrl =
-              "https://image.tmdb.org/t/p/original/" + film.poster_path;
-            return (
-              <MediumFilmIcon
-                key={film.id}
-                id={film.id}
-                posterUrl={posterUrl}
-                filmTitle={filmTitle}
-              />
-            );
-          })}
-        </div>
-      </div>
+      <HomeFilmDisplay filmDisplay={filmDisplay}/>
       <UserList />
     </div>
   );

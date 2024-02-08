@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const SmallUserIcon = ({ username, profileImg }) => {
   return (
     <Link to={`/user/${username}`}>
-      <div className="w-12 h-12 rounded-full overflow-hidden flex justify-center items-center">
+      <div className="w-12 h-12 rounded-full overflow-hidden flex justify-center items-center border border-transparent hover:border-white">
         <img
           src={profileImg}
           alt=""

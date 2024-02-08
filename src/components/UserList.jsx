@@ -24,9 +24,9 @@ const UserList = () => {
 
   //console.log(userData)
   return (
-    <div className="bg-[#2a1f35] m-10 p-4 rounded-lg">
-      <h1>List of Users</h1>
-      <div className="grid grid-cols-3 gap-1">
+    <div className="flex flex-col w-full gap-4 bg-[#170b25] m-10 p-4 rounded-lg border border-black">
+      <h1 className="text-lg">List of Users</h1>
+      <div className="flex flex-wrap gap-1 justify-center bg-black/70 p-4 rounded-lg">
         {userData.map((user) => {
           return (
             <SmallUserIcon
