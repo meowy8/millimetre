@@ -21,7 +21,7 @@ const NavBar = () => {
 
   return (
     <nav className=" flex justify-center p-4 bg-[#231236] border-b border-black">
-      <div className="flex justify-between items-center w-full md:w-4/5 lg:w-3/5">
+      <div className="flex justify-between items-center w-full md:w-4/5 lg:max-w-[1500px]">
         <div>
           <Link to="/">
             <h1 className="main-title text-2xl">MILLIMETRE</h1>

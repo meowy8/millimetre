@@ -7,10 +7,7 @@ const CatalogueSearchBar = ({
   return (
     <div className="">
       {!displaySearchBar ? (
-        <button
-          onClick={searchBarDisplay}
-          className=""
-        >
+        <button onClick={searchBarDisplay} className="">
           Search films...
         </button>
       ) : (
@@ -24,7 +21,10 @@ const CatalogueSearchBar = ({
             onChange={handleInputChange}
             className="rounded-s-sm text-sm"
           />
-          <button onClick={searchBarDisplay} className="bg-[#231236] px-2 py-1 rounded-e-md text-sm">
+          <button
+            onClick={searchBarDisplay}
+            className="bg-[#231236] px-2 py-1 rounded-e-md text-sm"
+          >
             Close
           </button>
         </div>

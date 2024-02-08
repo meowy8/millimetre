@@ -79,7 +79,7 @@ const UserNotesMini = ({
         {listOfNotes.length > 3 && (
           <div className="flex justify-center p-2">
             <Link to={`/notes/${username}`} className="hover:underline">
-              more...
+              View All
             </Link>
           </div>
         )}

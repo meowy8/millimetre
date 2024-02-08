@@ -45,7 +45,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-8 items-center">
+    <div className="flex flex-col gap-8 items-center max-w-[2000px]">
       <WelcomeSection />
       <HomeFilmDisplay filmDisplay={filmDisplay}/>
       <UserList />
