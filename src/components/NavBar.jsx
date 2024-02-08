@@ -20,10 +20,10 @@ const NavBar = () => {
   //console.log('user:', user)
 
   return (
-    <nav className="flex justify-between items-center p-4 bg-[#28143e]">
+    <nav className="flex justify-between items-center p-4 bg-[#231236] border-b border-black">
       <div>
         <Link to="/">
-          <h1 className="main-title text-xl">MILLIMETRE</h1>
+          <h1 className="main-title text-2xl">MILLIMETRE</h1>
         </Link>
       </div>
       <div className="flex gap-4 items-center">
