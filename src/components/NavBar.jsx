@@ -22,7 +22,9 @@ const NavBar = () => {
   return (
     <nav className="flex justify-between items-center p-4 bg-[#28143e]">
       <div>
-        <Link to="/">mm</Link>
+        <Link to="/">
+          <h1 className="main-title text-xl">MILLIMETRE</h1>
+        </Link>
       </div>
       <div className="flex gap-4 items-center">
         {user && (
@@ -30,7 +32,7 @@ const NavBar = () => {
             <div className="flex w-8 h-8 rounded-full overflow-hidden justify-center">
               <img src={profileImg} alt="" className="flex w-full h-full" />
             </div>
-            {username}
+            <span className="username">{username}</span>
           </Link>
         )}
         <Link to={"/catalogue"}>Catalogue</Link>

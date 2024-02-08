@@ -142,7 +142,7 @@ const NoteMain = ({
           )}
         </div>
         <div className="flex p-2 bg-[#14091f] rounded-sm m-2 min-h-24">
-          <p className="text-sm p-2">{noteContent}</p>
+          <p className="text-sm p-2 note">{noteContent}</p>
         </div>
       </div>
       {modalDisplay && (

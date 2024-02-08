@@ -11,10 +11,56 @@ input {
 }
 
 @font-face {
+  font-family: "Agnes";
+  src: url("/Fonts/Agnes/Agnes-Regular.ttf") format("ttf");
+  src: url("/Fonts/Agnes/Agnes-Regular.otf") format("opentype");
+}
+
+@font-face {
   font-family: "Subjectivity";
-  src: url("/Subjectivity/Subjectivity-Medium.woff2") format("woff2");
+  src: url("/Fonts/Subjectivity/Subjectivity-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Soria";
+  src: url("/Fonts/soria/soria-font.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Lora";
+  src: url("/Fonts/Lora/static/Lora-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "League Gothic";
+  src: url("/Fonts/LeagueGothic-1.601/static/OTF/LeagueGothic-Regular.otf")
+    format("opentype");
+}
+@font-face {
+  font-family: "League Gothic Italic";
+  src: url("/Fonts/LeagueGothic-1.601/static/OTF/LeagueGothic-Italic.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("/Fonts/Open_Sans/static/OpenSans_Condensed-Regular.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: "Open Sans Italic";
+  src: url("/Fonts/Open_Sans/static/OpenSans_Condensed-Italic.ttf")
+    format("truetype");
 }
 
 body {
-  font-family: "Subjectivity", sans-serif;
+  font-family: "Open Sans", serif;
+}
+
+.main-title {
+  font-family: "Soria", serif;
+}
+
+.username {
+  font-family: "Open Sans Italic";
 }
