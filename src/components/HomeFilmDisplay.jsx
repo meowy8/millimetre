@@ -4,7 +4,7 @@ const HomeFilmDisplay = ({filmDisplay}) => {
   return (
     <div
     id="films-container"
-    className="bg-[#231236] flex items-center justify-center py-8 rounded-md mt-6 w-full border border-black architect-pattern"
+    className="bg-[#1d0e2f] flex items-center justify-center py-8 rounded-md mt-6 w-full border border-black "
   >
     <div className="grid grid-cols-2 gap-4">
       {filmDisplay?.map((film) => {

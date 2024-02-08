@@ -24,7 +24,7 @@ const UserList = () => {
 
   //console.log(userData)
   return (
-    <div className="flex flex-col w-full gap-4 bg-[#170b25] m-10 p-4 rounded-lg border border-black">
+    <div className="flex flex-col w-full gap-4 bg-[#1d0e2f] m-10 p-4 rounded-lg border border-black">
       <h1 className="text-lg">List of Users</h1>
       <div className="flex flex-wrap gap-1 justify-center bg-black/70 p-4 rounded-lg">
         {userData.map((user) => {
