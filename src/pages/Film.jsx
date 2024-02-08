@@ -265,10 +265,16 @@ const Film = () => {
     }
   };
 
-  const sendAllNoteData = () => {
+  const sendAllNoteData = async () => {
     const noteId = generateRandomID();
-    sendNotetoFilmNotes(noteId);
-    sendNotetoUserNotes(noteId);
+    try {
+      await Promise.all([sendNotetoFilmNotes(noteId), sendNotetoUserNotes(noteId)])
+
+      closeModal()
+      location.reload()
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   useEffect(() => {

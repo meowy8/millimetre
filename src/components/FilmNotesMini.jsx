@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import FilmNote from "./FilmNote";
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import NoteMain from "./NoteMain";
 
@@ -19,7 +19,6 @@ const FilmNotesMini = ({ filmId, title, openModal, user }) => {
             noteContent: noteData.noteContent,
             noteId: noteData.noteId,
             userId: noteData.userId,
-            postedBy: noteData.postedBy,
             profileImg: noteData.profileImg,
             type: noteData.type,
             title: noteData.filmTitle,
@@ -58,7 +57,6 @@ const FilmNotesMini = ({ filmId, title, openModal, user }) => {
               <NoteMain
                 key={note.noteId}
                 noteId={note.noteId}
-                username={note.postedBy}
                 posterUrl={note.posterUrl}
                 noteContent={note.noteContent}
                 displayTitle={note.title}

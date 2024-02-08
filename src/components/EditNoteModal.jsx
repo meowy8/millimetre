@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const EditNoteModal = ({
-  sendAllNoteData,
+  updateAllNoteData,
   noteContent,
   newNoteContent,
   setNewNoteContent,
@@ -23,13 +23,12 @@ const EditNoteModal = ({
   const handleSave = (e) => {
     e.preventDefault();
     if (newNoteContent) {
-      sendAllNoteData();
+      updateAllNoteData();
     }
   };
 
   const handleDelete = () => {
     deleteNoteData();
-    closeModal();
   };
 
   useEffect(() => {

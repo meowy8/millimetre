@@ -4,7 +4,7 @@ import SmallUserIcon from "./SmallUserIcon";
 import { UserAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import EditNoteModal from "./EditNoteModal";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
 const NoteMain = ({
@@ -15,7 +15,6 @@ const NoteMain = ({
   displayTitle,
   filmId,
   type,
-  username,
   userId,
   noteId,
 }) => {
@@ -23,8 +22,23 @@ const NoteMain = ({
   const [newNoteContent, setNewNoteContent] = useState("");
   const [dataSentToUserNotes, setDataSentToUserNotes] = useState(false);
   const [dataSentToFilmNotes, setDataSentToFilmNotes] = useState(false);
+  const [username, setUsername] = useState(null);
 
   const { user } = UserAuth();
+
+  // make sure that the most up to date username is retrieved
+  useEffect(() => {
+    const fetchUsername = async () => {
+      const userRef = doc(db, "users", userId);
+      try {
+        await getDoc(userRef).then((doc) => setUsername(doc.data().username));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUsername();
+  }, [userId]);
 
   useEffect(() => {
     console.log(noteId);
@@ -38,7 +52,7 @@ const NoteMain = ({
     setModalDisplay(true);
   };
 
-  const sendNotetoUserNotes = async (noteId) => {
+  const updateUserNote = async (noteId) => {
     const docRef = doc(db, "users", user.uid, "notes", noteId);
     try {
       await updateDoc(docRef, {
@@ -49,7 +63,7 @@ const NoteMain = ({
     }
   };
 
-  const sendNotetoFilmNotes = async (noteId) => {
+  const updateFilmNote = async (noteId) => {
     const docRef = doc(db, "filmNotes", filmId, "notes", noteId);
     try {
       await updateDoc(docRef, {
@@ -60,9 +74,14 @@ const NoteMain = ({
     }
   };
 
-  const sendAllNoteData = () => {
-    sendNotetoFilmNotes(noteId);
-    sendNotetoUserNotes(noteId);
+  const updateAllNoteData = async () => {
+    try {
+      await Promise.all([updateUserNote(noteId), updateFilmNote(noteId)]);
+  
+      location.reload()
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   useEffect(() => {
@@ -87,9 +106,15 @@ const NoteMain = ({
     }
   };
 
-  const deleteNoteData = () => {
-    deleteFromFilmNotes();
-    deleteFromUserNotes();
+  const deleteNoteData = async () => {
+    try {
+      await Promise.all([deleteFromFilmNotes(), deleteFromUserNotes()]);
+
+      closeModal();
+      location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -127,7 +152,7 @@ const NoteMain = ({
           filmTitle={displayTitle}
           newNoteContent={newNoteContent}
           setNewNoteContent={setNewNoteContent}
-          sendAllNoteData={sendAllNoteData}
+          updateAllNoteData={updateAllNoteData}
           deleteNoteData={deleteNoteData}
         />
       )}
