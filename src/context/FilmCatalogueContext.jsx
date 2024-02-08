@@ -35,13 +35,13 @@ export const FilmCatalogueProvider = ({ children }) => {
         for (let pageNum = 1; pageNum <= 3; pageNum++) {
           fetch(
             `https://api.themoviedb.org/3/list/8289621?language=en-US&page=${pageNum}`,
-            options
+            options,
           )
             .then((response) => response.json())
             .then((data) => {
               // console.log('Fetched data inside context', data)
               data.items.forEach((film) =>
-                setFilmCatalogue((prev) => [...prev, film])
+                setFilmCatalogue((prev) => [...prev, film]),
               );
             })
             .catch((err) => console.error(err));
@@ -62,13 +62,13 @@ export const FilmCatalogueProvider = ({ children }) => {
             db,
             "users",
             user.uid,
-            "watched"
+            "watched",
           );
           const collectionSnapshot = await getDocs(watchedFilmsCollection);
-  
+
           if (!collectionSnapshot.empty) {
             const watchedFilmsDocs = collectionSnapshot.docs;
-  
+
             watchedFilmsDocs.forEach((film) => {
               setUserWatchedFilmsId((prev) => [...prev, film.data().id]);
             });
@@ -77,7 +77,7 @@ export const FilmCatalogueProvider = ({ children }) => {
           console.log(error);
         }
       };
-  
+
       fetchWatchedFilms();
     }
   }, [user]);
@@ -97,12 +97,12 @@ export const FilmCatalogueProvider = ({ children }) => {
   useEffect(() => {
     if (user) {
       checkFavouritesCount(user.uid).then(
-        (count) => count !== null && setFavFilmsCount(count)
+        (count) => count !== null && setFavFilmsCount(count),
       );
     }
   }, [user, checkFavouritesCount]);
 
-  useEffect(() => console.log(userWatchedFilmsId), [userWatchedFilmsId])
+  useEffect(() => console.log(userWatchedFilmsId), [userWatchedFilmsId]);
 
   return (
     <FilmCatalogueContext.Provider
@@ -116,7 +116,7 @@ export const FilmCatalogueProvider = ({ children }) => {
         setFavFilmsCount,
         checkFavouritesCount,
         userWatchedFilmsId,
-        setUserWatchedFilmsId
+        setUserWatchedFilmsId,
       }}
     >
       {children}

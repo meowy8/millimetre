@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { UserAuth } from "../context/AuthContext";
@@ -15,6 +15,12 @@ const UserCreate = () => {
 
   const storage = getStorage();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   if (userAccount) {
     return <Navigate to={"/"} />;
@@ -61,7 +67,7 @@ const UserCreate = () => {
   const uploadFile = async () => {
     const mediaStorRef = ref(storage, "media/" + user.uid);
     await uploadBytes(mediaStorRef, fileToUpload).then(() =>
-      console.log("uploaded")
+      console.log("uploaded"),
     );
     await getDownloadURL(mediaStorRef).then((url) => setProfileImg(url));
   };

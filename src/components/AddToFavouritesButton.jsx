@@ -8,12 +8,10 @@ const AddToFavouritesButton = ({
     <div>
       {favourited ? (
         <button onClick={deleteFavouritesData}>Remove from Favourites</button>
+      ) : !favSlotsFull ? (
+        <button onClick={sendFavouritesData}>Add to Favourites</button>
       ) : (
-        !favSlotsFull ? (
-          <button onClick={sendFavouritesData}>Add to Favourites</button>
-        )
-        :
-        (<span className="text-sm">Your favourites slots are full!</span>)
+        <span className="text-sm">Your favourites slots are full!</span>
       )}
     </div>
   );

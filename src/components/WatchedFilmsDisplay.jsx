@@ -15,14 +15,14 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
   const { filmCatalogue } = FilmCatalogue();
 
   useEffect(() => {
-    setProfileWatchedFilmsId([])
+    setProfileWatchedFilmsId([]);
     const fetchWatchedFilms = async () => {
       try {
         const watchedFilmsCollection = collection(
           db,
           "users",
           userDataId,
-          "watched"
+          "watched",
         );
         const collectionSnapshot = await getDocs(watchedFilmsCollection);
 
@@ -39,7 +39,7 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
     };
 
     fetchWatchedFilms();
-  }, [userDataId, setProfileWatchedFilmsId, user]);
+  }, [userDataId, setProfileWatchedFilmsId]);
 
   useEffect(() => {
     setProfileWatchedFilmsData([]);
@@ -85,15 +85,18 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
       <div>
         {profileWatchedFilmsData.length > 0 ? (
           <div className="grid grid-cols-3 gap-4">
-            {profileWatchedFilmsData.map((film, index) => {
+            {profileWatchedFilmsData?.map((film, index) => {
               if (index < numOfFilmsDisplayed) {
-                const filmTitle = film.title.toLowerCase().split(" ").join("-");
+                const filmTitle = film?.title
+                  ?.toLowerCase()
+                  .split(" ")
+                  .join("-");
                 const posterUrl =
-                  "https://image.tmdb.org/t/p/original/" + film.poster_path;
+                  "https://image.tmdb.org/t/p/original/" + film?.poster_path;
                 return (
                   <MediumFilmIcon
-                    key={film.id}
-                    id={film.id}
+                    key={film?.id}
+                    id={film?.id}
                     filmTitle={filmTitle}
                     posterUrl={posterUrl}
                   />

@@ -24,6 +24,12 @@ const Settings = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
+  useEffect(() => {
     setPreviewImage(userAccount?.profileImg);
     setProfileImg(userAccount?.profileImg);
   }, [userAccount]);
@@ -91,8 +97,6 @@ const Settings = () => {
     );
     await getDownloadURL(mediaStorRef).then((url) => setProfileImg(url));
   };
-
-
 
   return (
     <div className="flex flex-col justify-center items-center w-full gap-4">

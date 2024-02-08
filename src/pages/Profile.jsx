@@ -6,6 +6,8 @@ import FavouriteFilmsDisplay from "../components/FavouriteFilmsDisplay";
 import UserBio from "../components/UserBio";
 import { UserAuth } from "../context/AuthContext";
 import WatchedFilmsDisplay from "../components/WatchedFilmsDisplay";
+import UserNotesMini from "../components/UserNotesMini";
+import CreateNoteModal from "../components/CreateNoteModal";
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState(null);
@@ -20,7 +22,7 @@ const Profile = () => {
       const usersCollection = collection(db, "users");
       const usernameQuery = query(
         usersCollection,
-        where("username", "==", userId)
+        where("username", "==", userId),
       );
       const querySnapshot = await getDocs(usernameQuery);
 
@@ -37,6 +39,12 @@ const Profile = () => {
     getUserData();
   }, [userId]);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   //useEffect(() => console.log(userProfile));
 
   return (
@@ -45,7 +53,11 @@ const Profile = () => {
         <div className="flex flex-col items-center gap-4">
           <h1 className="text-3xl">Profile</h1>
           <div className="bg-red-400 w-32 h-32 rounded-full overflow-hidden flex justify-center items-center">
-            <img src={userProfile.profileImg} alt="" className="flex w-full h-full object-cover" />
+            <img
+              src={userProfile.profileImg}
+              alt=""
+              className="flex w-full h-full object-cover"
+            />
           </div>
           {user?.uid === userDocId && (
             <Link
@@ -66,6 +78,11 @@ const Profile = () => {
           <WatchedFilmsDisplay
             username={userProfile.username}
             userDataId={userDocId}
+          />
+          <UserNotesMini
+            username={userProfile.username}
+            profileImg={userProfile.profileImg}
+            userDocId={userDocId}
           />
         </div>
       )}

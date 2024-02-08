@@ -13,7 +13,13 @@ const Catalogue = () => {
   const [filteredCatalogue, setFilteredCatalogue] = useState([]);
   const [toggleFaded, setToggleFaded] = useState(false);
 
-  const {user} = UserAuth()
+  const { user } = UserAuth();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   useEffect(() => setFilteredCatalogue(filmCatalogue), [filmCatalogue]);
 
@@ -30,14 +36,11 @@ const Catalogue = () => {
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
 
-    if (e.target.value === "") {
-      setFilteredCatalogue(filmCatalogue);
-    } else {
-      const filteredList = filmCatalogue.filter((film) => {
-        return film.title.toLowerCase().includes(searchInput.toLowerCase());
-      });
-      setFilteredCatalogue(filteredList);
-    }
+    const filteredList = filmCatalogue.filter((film) => {
+      return film.title.toLowerCase().includes(e.target.value);
+    });
+
+    setFilteredCatalogue(filteredList);
   };
 
   const handleToggleChange = () => {

@@ -6,6 +6,12 @@ const Home = () => {
   const [filmDisplay, setFilmDisplay] = useState(null);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
+  useEffect(() => {
     const filmListFetch = async () => {
       try {
         const options = {
@@ -45,6 +51,7 @@ const Home = () => {
       >
         <div className="grid grid-cols-2 gap-4">
           {filmDisplay?.map((film) => {
+            const filmTitle = film.title.toLowerCase().split(" ").join("-");
             const posterUrl =
               "https://image.tmdb.org/t/p/original/" + film.poster_path;
             return (
@@ -52,6 +59,7 @@ const Home = () => {
                 key={film.id}
                 id={film.id}
                 posterUrl={posterUrl}
+                filmTitle={filmTitle}
               />
             );
           })}
