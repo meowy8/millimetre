@@ -22,7 +22,7 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
           db,
           "users",
           userDataId,
-          "watched",
+          "watched"
         );
         const collectionSnapshot = await getDocs(watchedFilmsCollection);
 
@@ -82,7 +82,7 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
           ) : null}
         </div>
       </div>
-      <div>
+      <div className="flex justify-center items-center">
         {profileWatchedFilmsData.length > 0 ? (
           <div className="grid grid-cols-3 gap-4">
             {profileWatchedFilmsData?.map((film, index) => {

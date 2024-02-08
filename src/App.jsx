@@ -19,11 +19,11 @@ function App() {
 
   return (
     <AuthContextProvider>
-      <div className="text-white">
+      <div className="">
         <NavBar />
         <div
           style={{ backgroundImage: `url(${texturePath})` }}
-          className="bg-gray-950 min-h-screen p-10"
+          className="bg-gray-950 min-h-screen p-10 flex justify-center"
         >
           <FilmCatalogueProvider>
             <Routes>

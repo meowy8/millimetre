@@ -118,8 +118,8 @@ const NoteMain = ({
   };
 
   return (
-    <div className="bg-[#351951] p-4 flex gap-2 rounded-md border border-black">
-      <div>
+    <div className="flex gap-2 rounded-md border border-black shadow-md shadow-black bg-[#150921]">
+      <div className="flex p-2">
         {type !== "user note" ? (
           <SmallUserIcon profileImg={profileImg} username={username} />
         ) : (
@@ -130,10 +130,10 @@ const NoteMain = ({
           />
         )}
       </div>
-      <div id="note-text" className="w-full">
+      <div id="note-text" className="flex flex-col justify-between w-full p-2">
         <div className="flex justify-between">
           <Link to={`/film/${filmId}/${urlTitle}`}>
-            <h1 className="p-2 hover:underline">{displayTitle}</h1>
+            <h1 className="hover:underline line-clamp-1">{displayTitle}</h1>
           </Link>
           {user?.uid === userId && (
             <button onClick={openModal} className="text-sm">
@@ -141,8 +141,8 @@ const NoteMain = ({
             </button>
           )}
         </div>
-        <div className="flex p-2 bg-[#14091f] rounded-sm m-2 min-h-24">
-          <p className="text-sm p-2 note">{noteContent}</p>
+        <div className="flex p-2 bg-black/70 rounded-sm min-h-28">
+          <p className="text-sm">{noteContent}</p>
         </div>
       </div>
       {modalDisplay && (

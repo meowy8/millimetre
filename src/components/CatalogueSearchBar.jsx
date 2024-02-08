@@ -5,16 +5,16 @@ const CatalogueSearchBar = ({
   searchInput,
 }) => {
   return (
-    <div className="pl-4 pb-4">
+    <div className="">
       {!displaySearchBar ? (
         <button
           onClick={searchBarDisplay}
-          className="font-light bg-[#28143e] p-1 rounded-md"
+          className=""
         >
-          Search films
+          Search films...
         </button>
       ) : (
-        <div className="flex gap-4">
+        <div className="flex h-full">
           <input
             type="text"
             name="search"
@@ -22,9 +22,10 @@ const CatalogueSearchBar = ({
             placeholder="Search catalogue"
             value={searchInput}
             onChange={handleInputChange}
+            className="rounded-s-sm text-sm"
           />
-          <button onClick={searchBarDisplay} className="bg-[#28143e] p-2">
-            X
+          <button onClick={searchBarDisplay} className="bg-[#231236] px-2 py-1 rounded-e-md text-sm">
+            Close
           </button>
         </div>
       )}
