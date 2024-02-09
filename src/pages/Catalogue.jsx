@@ -52,7 +52,7 @@ const Catalogue = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-w-96 md:min-w-[600px] lg:min-w-[1000px]">
+    <div className="flex flex-col p-10 items-center min-w-96 md:min-w-[600px] lg:min-w-[1000px]">
       <div className="flex flex-col justify-center items-center w-full">
         <div className="flex justify-between items-end px-2 pb-4 w-full md:w-5/6 lg:max-w-[650px]">
           <CatalogueSearchBar

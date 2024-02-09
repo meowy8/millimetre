@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const WelcomeSection = () => {
   return (
-    <div className="p-4 text-md light-font md:w-4/5 lg:w-3/5">
+    <div className="p-10 text-md light-font md:w-4/5 lg:w-3/5">
       <p className="flex flex-col gap-4 md:w-4/5 lg:w-3/5">
         <span className="text-2xl">
           Welcome to <span className="main-title text-3xl">MILLIMETRE</span>,

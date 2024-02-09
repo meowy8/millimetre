@@ -1,1 +1,1 @@
-- add the overview for each of the home page films
+- fix favourites button so it resets if the user sign out

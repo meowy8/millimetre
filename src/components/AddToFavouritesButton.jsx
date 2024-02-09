@@ -5,7 +5,7 @@ const AddToFavouritesButton = ({
   favSlotsFull,
 }) => {
   return (
-    <div>
+    <div className="mt-4">
       {favourited ? (
         <button onClick={deleteFavouritesData}>Remove from Favourites</button>
       ) : !favSlotsFull ? (

@@ -23,7 +23,7 @@ function App() {
         <NavBar />
         <div
           style={{ backgroundImage: `url(${texturePath})` }}
-          className="bg-gray-950 min-h-screen p-10 flex justify-center"
+          className="bg-gray-950 min-h-screen flex justify-center"
         >
           <FilmCatalogueProvider>
             <Routes>

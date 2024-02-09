@@ -35,7 +35,7 @@ const FilmNotesMini = ({ filmId, title, openModal, user }) => {
   }, [filmId]);
 
   return (
-    <div className="flex flex-col gap-2 bg-[#150921] p-4 w-full">
+    <div className="flex flex-col gap-2 bg-[#150921] mt-10 p-4 w-full md:mt-6 md:w-4/5">
       <div className="flex justify-between">
         <Link
           className="text-xl hover:underline"
@@ -44,8 +44,8 @@ const FilmNotesMini = ({ filmId, title, openModal, user }) => {
           Notes
         </Link>
         {user && (
-          <button onClick={openModal} className="text-sm">
-            + Create new note
+          <button onClick={openModal} className="text-2xl hover:bg-yellow-50 hover:text-black rounded-full px-3">
+            +
           </button>
         )}
       </div>
