@@ -9,7 +9,7 @@ const Notes = () => {
   }, []);
 
   return (
-    <div>
+    <div className="p-4 w-full md:w-4/5 max-w-[700px]">
       <Outlet />
     </div>
   );

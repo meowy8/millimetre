@@ -37,7 +37,7 @@ const Catalogue = () => {
     setSearchInput(e.target.value);
 
     const filteredList = filmCatalogue.filter((film) => {
-      return film.title.toLowerCase().includes(e.target.value);
+      return film.title.toLowerCase().includes((e.target.value).toLowerCase());
     });
 
     setFilteredCatalogue(filteredList);
