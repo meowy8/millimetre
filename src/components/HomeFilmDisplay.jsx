@@ -5,9 +5,9 @@ const HomeFilmDisplay = ({ filmDisplay }) => {
   return (
     <div
       id="films-container"
-      className="bg-[#1d0e2f] flex items-center justify-center p-4 rounded-md mt-6 w-full border border-black md:w-4/5 lg:w-3/5"
+      className=" flex items-center md:justify-center p-4 rounded-md w-full  md:w-4/5 lg:w-3/5"
     >
-      <div className="grid grid-cols-2 gap-x-6 gap-y-4 bg-black/70 p-4 rounded-md md:gap-4">
+      <div className="flex flex-col md:grid grid-cols-2 gap-x-6 gap-y-4 p-4 rounded-md md:gap-4">
         {filmDisplay?.map((film) => {
           const filmTitle = film.title.toLowerCase().split(" ").join("-");
           const posterUrl =
@@ -19,7 +19,7 @@ const HomeFilmDisplay = ({ filmDisplay }) => {
                 posterUrl={posterUrl}
                 filmTitle={filmTitle}
               />
-              <div className="w-3/5 hidden p-2 md:block">
+              <div className="w-3/5  p-2 md:block">
                   <h1 className="text-lg hover:underline line-clamp-2">{film.title}</h1>
                 <div className="flex overflow-hidden mt-2">
                   <p className="text-sm line-clamp-4 text-zinc-400">{film.overview}</p>

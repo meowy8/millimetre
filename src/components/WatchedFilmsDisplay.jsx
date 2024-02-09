@@ -60,7 +60,7 @@ const WatchedFilmsDisplay = ({ username, userDataId }) => {
   };
 
   return (
-    <div className="bg-[#231236] p-4 rounded-sm">
+    <div className=" p-4 rounded-sm">
       <div className="mb-2 flex justify-between">
         <div className="flex items-center gap-4">
           <h1 className="text-lg">Watched</h1>

@@ -46,8 +46,8 @@ const FavouriteFilmsDisplay = ({ username, userDataId }) => {
   //console.log(favFilmsData)
 
   return (
-    <div className="bg-[#231236] p-4 rounded-sm w-full">
-      <div className="mb-2">
+    <div className=" p-4 rounded-sm w-full flex flex-col items-center">
+      <div className="mb-2 w-full">
         <h1 className="text-lg">Favourites</h1>
       </div>
       <div>

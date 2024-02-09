@@ -50,10 +50,10 @@ const Profile = () => {
   return (
     <>
       {userProfile && (
-        <div className="md:p-10 w-full flex justify-center">
-          <div className="bg-[#150921] p-2 rounded-md w-screen lg:w-[1000px] md:w-4/5">
-            <div className="flex flex-col h-full rounded-md items-center gap-1 md:gap-4 lg:grid grid-cols-2 lg:max-w-[1500px] bg-black/50 md:p-4">
-              <div className="flex flex-col items-center md:p-2 p-6">
+        <div className="md:p-10 w-full h-full flex justify-center">
+          <div className="bg-[#150921] p-2 rounded-md w-screen lg:w-[1000px] lg:min-h-[700px] h-full md:w-4/5">
+            <div className="flex flex-col h-full rounded-md items-center gap-4 md:gap-4 lg:grid grid-cols-2 bg-black/50 md:p-4">
+              <div className="flex flex-col items-center h-full w-full md:p-2 p-6">
                 <div className="bg-red-400 w-32 h-32 rounded-full overflow-hidden flex justify-center items-center m-4">
                   <img
                     src={userProfile.profileImg}
@@ -74,19 +74,19 @@ const Profile = () => {
                 </span>
                 <UserBio bio={userProfile.bio} />
               </div>
-              <div className="h-full w-full flex md-lg:w-4/5">
+              <div className="h-full flex  md-lg:w-4/5">
                 <FavouriteFilmsDisplay
                   username={userProfile.username}
                   userDataId={userDocId}
                 />
               </div>
-              <div className="lg:h-full w-full md-lg:w-4/5">
+              <div className="lg:h-full md-lg:w-4/5">
                 <WatchedFilmsDisplay
                   username={userProfile.username}
                   userDataId={userDocId}
                 />
               </div>
-              <div className="h-full w-full md-lg:w-4/5">
+              <div className="h-full w-full w-4/5">
                 <UserNotesMini
                   username={userProfile.username}
                   profileImg={userProfile.profileImg}

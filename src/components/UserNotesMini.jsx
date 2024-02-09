@@ -46,7 +46,7 @@ const UserNotesMini = ({
   useEffect(() => console.log(listOfNotes), [listOfNotes]);
 
   return (
-    <div className="flex flex-col gap-2 bg-[#231236] p-4 rounded-sm">
+    <div className="flex flex-col w-full gap-2  p-4 rounded-sm">
       <div className="flex justify-between">
         <Link to={`/notes/${username}`} className="hover:underline">
           Notes by {username}
