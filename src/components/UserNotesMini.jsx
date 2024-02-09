@@ -57,7 +57,7 @@ const UserNotesMini = ({
           listOfNotes.map((note, index) => {
             const urlTitle = note.title?.toLowerCase().split(" ").join("-");
             return (
-              index < 3 && (
+              index < 2 && (
                 <NoteMain
                   key={note.noteId}
                   noteId={note.noteId}

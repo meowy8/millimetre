@@ -297,7 +297,7 @@ const Film = () => {
                 }
               />
             </div>
-            <div className="flex flex-col md:w-2/5">
+            <div className="flex flex-col md:w-2/5 lg:w-3/5">
               <div className="flex flex-col gap-2">
                 <h1 className="text-2xl font-semibold mt-8 md:m-0">{filmPageData.title}</h1>
                 {directors.map((director) => {

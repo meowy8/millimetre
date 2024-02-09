@@ -132,7 +132,7 @@ const NoteMain = ({
       </div>
       <div id="note-text" className="flex flex-col justify-between w-full p-2">
         <div className="flex justify-between mb-2 mx-1">
-          {type !== "user note" && <span>Note by <Link to={`/user/${username}`} className="hover:underline">{username}</Link></span>}
+          {type !== "user note" && <span className="flex items-center gap-1">Note by <Link to={`/user/${username}`} className="hover:underline italic text-sm ">{username}</Link></span>}
           {type === "user note" && (
             <Link to={`/film/${filmId}/${urlTitle}`}>
               <h1 className="hover:underline line-clamp-1">{displayTitle}</h1>
