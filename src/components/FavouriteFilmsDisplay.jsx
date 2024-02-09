@@ -46,7 +46,7 @@ const FavouriteFilmsDisplay = ({ username, userDataId }) => {
   //console.log(favFilmsData)
 
   return (
-    <div className="bg-[#150921] p-4">
+    <div className="bg-[#231236] p-4 rounded-sm">
       <div className="mb-2">
         <h1 className="text-lg">Favourites</h1>
       </div>

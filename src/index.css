@@ -9,6 +9,7 @@ body {
 
 input[type="text"] {
   color: black;
+  padding: .2rem;
 }
 
 input {

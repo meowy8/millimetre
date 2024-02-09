@@ -118,7 +118,7 @@ const NoteMain = ({
   };
 
   return (
-    <div className="flex gap-2 rounded-md border border-black shadow-md shadow-black bg-[#150921]">
+    <div className="flex gap-2 rounded-md border border-black shadow-md shadow-black bg-[#231236]">
       <div className="flex p-2">
         {type !== "user note" ? (
           <SmallUserIcon profileImg={profileImg} username={username} />

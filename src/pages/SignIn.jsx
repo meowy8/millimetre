@@ -50,10 +50,12 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-3xl m-10">Sign In</h1>
-      <div>
-        <GoogleButton onClick={handleGoogleSignIn} />
+    <div className="bg-[#150921] p-4 m-10 h-full">
+      <div className="flex flex-col items-center bg-black/50 h-full p-4">
+        <h1 className="text-3xl pt-4">Sign In</h1>
+        <div className="p-10">
+          <GoogleButton onClick={handleGoogleSignIn} />
+        </div>
       </div>
     </div>
   );

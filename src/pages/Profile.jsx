@@ -52,7 +52,7 @@ const Profile = () => {
       {userProfile && (
         <div className="md:p-10 w-full flex justify-center">
           <div className="bg-[#150921] p-2 rounded-md w-screen lg:w-[1000px] md:w-4/5">
-            <div className="flex flex-col rounded-md items-center md:gap-4 lg:grid grid-cols-2 lg:max-w-[1500px] bg-black/50 md:p-4 ">
+            <div className="flex flex-col rounded-md items-center gap-1 md:gap-4 lg:grid grid-cols-2 lg:max-w-[1500px] bg-black/50 md:p-4">
               <div className="flex flex-col items-center md:p-2 p-6">
                 <div className="bg-red-400 w-32 h-32 rounded-full overflow-hidden flex justify-center items-center m-4">
                   <img

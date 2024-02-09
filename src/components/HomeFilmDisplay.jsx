@@ -7,13 +7,13 @@ const HomeFilmDisplay = ({ filmDisplay }) => {
       id="films-container"
       className="bg-[#1d0e2f] flex items-center justify-center p-4 rounded-md mt-6 w-full border border-black md:w-4/5 lg:w-3/5"
     >
-      <div className="grid grid-cols-2 gap-x-6 gap-y-4 md:gap-4 bg-black/70 p-4 rounded-md">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-4 bg-black/70 p-4 rounded-md md:gap-4">
         {filmDisplay?.map((film) => {
           const filmTitle = film.title.toLowerCase().split(" ").join("-");
           const posterUrl =
             "https://image.tmdb.org/t/p/original/" + film.poster_path;
           return (
-            <Link to={`/film/${film.id}/${filmTitle}`} key={film.id} className="flex gap-2 shadow-md shadow-black transition-transform hover:scale-[1.02] duration-100 bg-[#150921]">
+            <Link to={`/film/${film.id}/${filmTitle}`} key={film.id} className="flex gap-2 shadow-md shadow-black transition-transform hover:scale-[1.02] duration-100 bg-[#150921] hover:bg-[#231236]">
               <MediumFilmIcon
                 id={film.id}
                 posterUrl={posterUrl}

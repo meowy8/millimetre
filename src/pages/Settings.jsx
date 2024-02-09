@@ -90,53 +90,57 @@ const Settings = () => {
   const uploadFile = async () => {
     const mediaStorRef = ref(storage, "media/" + user.uid);
     await deleteObject(mediaStorRef).then(() =>
-      console.log("file deleted successdully"),
+      console.log("file deleted successdully")
     );
     await uploadBytes(mediaStorRef, fileToUpload).then(() =>
-      console.log("uploaded"),
+      console.log("uploaded")
     );
     await getDownloadURL(mediaStorRef).then((url) => setProfileImg(url));
   };
 
   return (
-    <div className="flex flex-col justify-center items-center w-full gap-4">
-      <h1 className="text-xl">Settings</h1>
-      <form
-        action="submit"
-        onSubmit={(e) => sendData(e)}
-        className="flex flex-col justify-center items-center gap-4"
-      >
-        <label htmlFor="profile-img">
-          Change Profile Image
-          <div className="w-full flex flex-col items-center gap-4">
-            <input type="file" onChange={handleFile} />
-            <div className="flex bg-red-400 w-32 h-32 rounded-full overflow-hidden">
-              <img src={previewImage} alt="" className=" w-full " />
+    <div className="w-full gap-4 bg-[#150921] p-2 md:m-10 md:h-full md:w-3/5">
+      <div className="flex flex-col md:justify-center items-center gap-4 bg-black/50 p-8 h-full">
+        <h1 className="text-xl">Settings</h1>
+        <form
+          action="submit"
+          onSubmit={(e) => sendData(e)}
+          className="flex flex-col justify-center items-center gap-4"
+        >
+          <label htmlFor="profile-img">
+            Change Profile Image
+            <div className="w-full flex flex-col items-center gap-4">
+              <input type="file" onChange={handleFile} />
+              <div className="flex bg-red-400 w-32 h-32 rounded-full overflow-hidden">
+                <img src={previewImage} alt="" className=" w-full " />
+              </div>
             </div>
-          </div>
-        </label>
-        <label htmlFor="username">
-          Change Username:
-          <input
-            type="text"
-            value={username || ""}
-            onChange={(e) => handleUsernameChange(e)}
-          />
-        </label>
-        <label htmlFor="bio">
-          Change Bio:
-          <input
-            type="text"
-            name="bio"
-            id="bio"
-            value={bio || ""}
-            onChange={(e) => handleBioChange(e)}
-          />
-        </label>
-        <button type="submit" className="bg-red-300">
-          Save Changes
-        </button>
-      </form>
+          </label>
+          <label htmlFor="username" className="flex flex-col">
+            Change Username:
+            <input
+              type="text"
+              value={username || ""}
+              onChange={(e) => handleUsernameChange(e)}
+              className="m-2"
+            />
+          </label>
+          <label htmlFor="bio" className="flex flex-col w-full">
+            Change Bio:
+            <textarea
+              type="text"
+              name="bio"
+              id="bio"
+              value={bio || ""}
+              onChange={(e) => handleBioChange(e)}
+              className="m-2 text-black"
+            />
+          </label>
+          <button type="submit" className="p-2 rounded-md bg-green-900 hover:bg-green-800">
+            Save Changes
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
