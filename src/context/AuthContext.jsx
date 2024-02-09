@@ -53,6 +53,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const logOut = () => {
     signOut(auth);
+    location.reload()
   };
 
   console.log(userAccount);

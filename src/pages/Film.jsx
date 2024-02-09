@@ -23,7 +23,7 @@ const Film = () => {
   const [directors, setDirectors] = useState([]);
   const [watched, setWatched] = useState(false);
   const [favourited, setFavourited] = useState(false);
-  const [favSlotsFull, setFavSlotsFull] = useState(false);
+  const [favSlotsFull, setFavSlotsFull] = useState(null);
   const [modalDisplay, setModalDisplay] = useState(false);
   const [noteContent, setNoteContent] = useState("");
   const [dataSentToUserNotes, setDataSentToUserNotes] = useState(false);

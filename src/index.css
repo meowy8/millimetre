@@ -12,6 +12,11 @@ input[type="text"] {
   padding: .2rem;
 }
 
+textarea {
+  color: black;
+  padding: .2rem;
+}
+
 input {
   font-family: sans-serif;
 }

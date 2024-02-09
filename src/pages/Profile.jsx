@@ -64,7 +64,7 @@ const Profile = () => {
                 {user?.uid === userDocId && (
                   <Link
                     to={"/settings"}
-                    className="bg-green-900 p-2 rounded-full text-sm"
+                    className="bg-green-900 hover:bg-green-800 p-2 rounded-full text-sm"
                   >
                     Edit Profile
                   </Link>
