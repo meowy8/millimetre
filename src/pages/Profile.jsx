@@ -51,7 +51,7 @@ const Profile = () => {
     <>
       {userProfile && (
         <div className="md:p-10 w-full h-full flex justify-center">
-          <div className="bg-[#150921] p-2 rounded-md w-screen lg:w-[1000px] lg:min-h-[700px] h-full md:w-4/5">
+          <div className="bg-[#150921] p-2 rounded-md w-screen lg:w-[1000px] lg:min-h-[700px]  md:w-4/5">
             <div className="flex flex-col h-full rounded-md items-center gap-4 md:gap-4 lg:grid grid-cols-2 bg-black/50 md:p-4">
               <div className="flex flex-col items-center h-full w-full md:p-2 p-6">
                 <div className="bg-red-400 w-32 h-32 rounded-full overflow-hidden flex justify-center items-center m-4">
@@ -86,7 +86,7 @@ const Profile = () => {
                   userDataId={userDocId}
                 />
               </div>
-              <div className="h-full w-full w-4/5">
+              <div className="h-full w-full">
                 <UserNotesMini
                   username={userProfile.username}
                   profileImg={userProfile.profileImg}
