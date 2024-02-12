@@ -24,7 +24,7 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  //useEffect(() => console.log(user), [user])
+  useEffect(() => console.log(user), [user]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -36,24 +36,22 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (user) {
-      const fetchUserAccount = async () => {
-        try {
-          const userRef = doc(db, "users", user.uid);
-          const userData = await getDoc(userRef);
-          setUserAccount(userData.data());
-        } catch (error) {
-          console.log(error);
-        }
-      };
+    const fetchUserAccount = async () => {
+      try {
+        const userRef = doc(db, "users", "demoUser");
+        const userData = await getDoc(userRef);
+        setUserAccount(userData.data());
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-      fetchUserAccount();
-    }
-  }, [user]);
+    fetchUserAccount();
+  }, []);
 
   const logOut = () => {
     signOut(auth);
-    location.reload()
+    location.reload();
   };
 
   console.log(userAccount);

@@ -1,7 +1,7 @@
 const UserBio = ({ bio }) => {
   return (
-    <div>
-      <p className="text-sm">{bio}</p>
+    <div className="flex justify-center">
+      <p className="text-sm w-80 text-center">{bio}</p>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useFetcher, useNavigate, useParams } from "react-router-dom";
 import LargeFilmIcon from "../components/LargeFilmIcon";
 import {
   collection,
@@ -32,7 +32,6 @@ const Film = () => {
   const { user, userAccount } = UserAuth();
   const { favFilmsCount, setFavFilmsCount, checkFavouritesCount } =
     FilmCatalogue();
-  const navigate = useNavigate();
 
   const { filmId, title } = useParams();
 
@@ -103,12 +102,11 @@ const Film = () => {
   }, [filmId]);
 
   useEffect(() => {
-    if (user) {
       const checkWatchlist = async () => {
         const docRef = doc(
           db,
           "users",
-          user.uid,
+          "demoUser",
           "watched",
           `${filmPageData.id}`
         );
@@ -121,16 +119,14 @@ const Film = () => {
       };
 
       checkWatchlist();
-    }
-  }, [filmPageData, user]);
+  }, [filmPageData]);
 
   useEffect(() => {
-    if (user) {
       const checkFavsList = async () => {
         const docRef = doc(
           db,
           "users",
-          user.uid,
+          "demoUser",
           "favFilms",
           `${filmPageData.id}`
         );
@@ -143,8 +139,7 @@ const Film = () => {
       };
 
       checkFavsList();
-    }
-  }, [filmPageData, user]);
+  }, [filmPageData]);
 
   useEffect(() => {
     if (favFilmsCount === 3) {
@@ -155,30 +150,21 @@ const Film = () => {
   }, [favFilmsCount]);
 
   const sendWatchedData = async () => {
-    if (!user) {
-      navigate("/signin");
-    } else {
-      const docRef = doc(
-        db,
-        "users",
-        user.uid,
-        "watched",
-        `${filmPageData.id}`
-      );
-      try {
-        await setDoc(docRef, {
-          title: filmPageData.title,
-          id: filmPageData.id,
-        }).then(() => setWatched(true));
-      } catch (error) {
-        console.log(error);
-      }
+    const docRef = doc(db, "users", "demoUser", "watched", `${filmPageData.id}`);
+    try {
+      await setDoc(docRef, {
+        title: filmPageData.title,
+        id: filmPageData.id,
+      }).then(() => setWatched(true));
+    } catch (error) {
+      console.log(error);
     }
+
     console.log("clicked");
   };
 
   const deleteWatchedData = async () => {
-    const docRef = doc(db, "users", user.uid, "watched", `${filmPageData.id}`);
+    const docRef = doc(db, "users", "demoUser", "watched", `${filmPageData.id}`);
     try {
       await deleteDoc(docRef).then(() => setWatched(false));
     } catch (error) {
@@ -186,14 +172,14 @@ const Film = () => {
     }
   };
 
+  useEffect(() => console.log(favFilmsCount), [favFilmsCount])
+
   const sendFavouritesData = async () => {
-    if (!user) {
-      navigate("/signin");
-    } else if (favFilmsCount < 3 && favFilmsCount !== null) {
+    if (favFilmsCount < 3 && favFilmsCount !== null) {
       const docRef = doc(
         db,
         "users",
-        user.uid,
+        "demoUser",
         "favFilms",
         `${filmPageData.id}`
       );
@@ -212,7 +198,7 @@ const Film = () => {
   };
 
   const deleteFavouritesData = async () => {
-    const docRef = doc(db, "users", user.uid, "favFilms", `${filmPageData.id}`);
+    const docRef = doc(db, "users", "demoUser", "favFilms", `${filmPageData.id}`);
     try {
       await deleteDoc(docRef).then(() => setFavourited(false));
       checkFavouritesCount().then((count) => setFavFilmsCount(count));
@@ -299,7 +285,9 @@ const Film = () => {
             </div>
             <div className="flex flex-col md:w-2/5 lg:w-3/5">
               <div className="flex flex-col gap-2">
-                <h1 className="text-2xl font-semibold mt-8 md:m-0">{filmPageData.title}</h1>
+                <h1 className="text-2xl font-semibold mt-8 md:m-0">
+                  {filmPageData.title}
+                </h1>
                 {directors.map((director) => {
                   return (
                     <span

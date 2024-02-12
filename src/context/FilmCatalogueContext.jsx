@@ -55,13 +55,12 @@ export const FilmCatalogueProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (user) {
       const fetchWatchedFilms = async () => {
         try {
           const watchedFilmsCollection = collection(
             db,
             "users",
-            user.uid,
+            "demoUser",
             "watched",
           );
           const collectionSnapshot = await getDocs(watchedFilmsCollection);
@@ -79,11 +78,10 @@ export const FilmCatalogueProvider = ({ children }) => {
       };
 
       fetchWatchedFilms();
-    }
-  }, [user]);
+  }, []);
 
   const checkFavouritesCount = useCallback(async () => {
-    const collectionRef = collection(db, "users", user.uid, "favFilms");
+    const collectionRef = collection(db, "users", "demoUser", "favFilms");
     try {
       const collectionSnap = await getDocs(collectionRef);
       const count = collectionSnap.size;
@@ -92,15 +90,13 @@ export const FilmCatalogueProvider = ({ children }) => {
       console.log(error);
       return null;
     }
-  }, [user]);
+  }, []);
 
   useEffect(() => {
-    if (user) {
-      checkFavouritesCount(user.uid).then(
+      checkFavouritesCount("demoUser").then(
         (count) => count !== null && setFavFilmsCount(count),
       );
-    }
-  }, [user, checkFavouritesCount]);
+  }, [checkFavouritesCount]);
 
   useEffect(() => console.log(userWatchedFilmsId), [userWatchedFilmsId]);
 

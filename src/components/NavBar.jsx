@@ -28,16 +28,13 @@ const NavBar = () => {
           </Link>
         </div>
         <div className="flex gap-4 items-center">
-          {user && (
-            <Link to={`/user/${username}`} className="flex items-center gap-2">
-              <div className="flex w-8 h-8 rounded-full overflow-hidden justify-center">
-                <img src={profileImg} alt="" className="flex w-full h-full" />
-              </div>
-              <span className="username">{username}</span>
-            </Link>
-          )}
+          <Link to={`/user/${username}`} className="flex items-center gap-2">
+            <div className="flex w-8 h-8 rounded-full overflow-hidden justify-center">
+              <img src={profileImg} alt="" className="flex w-full h-full" />
+            </div>
+            <span className="username">{username}</span>
+          </Link>
           <Link to={"/catalogue"}>Catalogue</Link>
-          {user ? <LogoutButton /> : <Link to="/signin">Sign In</Link>}
         </div>
       </div>
     </nav>
